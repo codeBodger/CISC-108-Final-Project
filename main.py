@@ -35,6 +35,21 @@ class World:
         self.text_score.text = f"Score: {self.score:.4}"
         self.text_score.x = get_width() - (GUTTER - self.text_score.width//2)
     
+    def sorted_onscreen_boulder_keys(self) -> [int]:
+        """
+        Gets a sorted list of the keys of the boulders that are below the top of
+            the game window.
+        
+        Returns:
+            list[int]: A sorted list of useful boulder keys
+        """
+        keys = sorted(list(self.boulders.keys()))
+        good_keys = []
+        for key in keys:
+            if self.boulders[key].boulder.y > 0:
+                good_keys.append(key)
+        return good_keys
+    
     def select(self, right: bool):
         """
         Selects the next boulder to the right if `right` is True, or to the left
@@ -44,14 +59,13 @@ class World:
             right (bool): Whether to select the next to the right or to the left
         """
         new_selected_index = 0
-        sorted_keys = sorted(list(self.boulders.keys()))
-        for i, key in enumerate(sorted_keys):
+        good_sorted_keys = self.sorted_onscreen_boulder_keys()
+        for i, key in enumerate(good_sorted_keys):
             self.boulders[key].boulder.alpha = .5
-            
             if key == self.selected:
                 new_selected_index = i + pm_bool(right)
-                new_selected_index = new_selected_index % len(self.boulders)
-        self.selected = sorted_keys[new_selected_index]
+                new_selected_index = new_selected_index % len(good_sorted_keys)
+        self.selected = good_sorted_keys[new_selected_index]
         self.boulders[self.selected].boulder.alpha = 1
     
     def select_previous(self):
