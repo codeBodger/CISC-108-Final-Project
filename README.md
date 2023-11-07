@@ -19,7 +19,7 @@ they are guessing.
 #### Milestone 1
 - [ ] Create a boulder class
   - [x] Create the boulders randomly at the top of the screen
-  - [ ] Make the boulders fall
+  - [x] Make the boulders fall
   - [ ] Allow the user to select different boulders using the U/D arrow keys
   - [ ] When a boulder hits the bottom of the screen, decrease the score by 10
         and remove the boulder object

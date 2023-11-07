@@ -12,6 +12,7 @@ if TYPE_CHECKING:
 
 BOULDER_SCALE = 5
 BOULDER_WIDTH = BOULDER_SCALE * 34
+BOULDER_SPEED = 2
 
 
 class Boulder:
@@ -38,7 +39,7 @@ class Boulder:
         )
         self.boulder.scale = BOULDER_SCALE
         while self.is_colliding_somewhere(world):
-            self.move_up()
+            self.shift_up()
         if self.boulder.y < -2 * self.boulder.height:
             self.boulder.destroy()
         else:
@@ -59,12 +60,18 @@ class Boulder:
                 return True
         return False
     
-    def move_up(self):
+    def shift_up(self):
         """
         Moves the boulder up by half of the height of the boulder, ideally so
             it is no longer overlapping any other boulders.
         """
         self.boulder.y -= self.boulder.height//2
+    
+    def move_down(self):
+        """
+        Moves the boulder down by BOULDER_SPEED.  This happens every frame.
+        """
+        self.boulder.y += BOULDER_SPEED
 
 
 # Allows the program to be run starting in this file, in addition to main.py
