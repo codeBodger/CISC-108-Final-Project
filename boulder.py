@@ -44,20 +44,24 @@ class Boulder:
         if self.boulder.y < -2 * self.boulder.height:
             self.boulder.destroy()
         else:
-            world.boulders.append(self)
+            world.boulders[self.boulder.x] = self
     
     def is_colliding_somewhere(self, world: World) -> bool:
         """
         Checks if this boulder is colliding with any other boulders in the world.
+        Or if the boulder has the same x-coordinate as another boulder.
         
         Args:
             world (World): The world in which to check the boulders.
 
         Returns:
-            bool: Whether or not this boulder is colliding.
+            bool: Whether or not this boulder is colliding or otherwise
+                interfering with an existing boulder.
         """
-        for boulder in world.boulders:
+        for boulder in world.boulders.values():
             if colliding(self.boulder, boulder.boulder):
+                return True
+            if self.boulder.x == boulder.boulder.x:
                 return True
         return False
     

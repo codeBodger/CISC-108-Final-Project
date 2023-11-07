@@ -20,7 +20,7 @@ they are guessing.
 - [ ] Create a boulder class
   - [x] Create the boulders randomly at the top of the screen
   - [x] Make the boulders fall
-  - [ ] Allow the user to select different boulders using the U/D arrow keys
+  - [ ] Allow the user to select different boulders using the L/R arrow keys
   - [ ] When a boulder hits the bottom of the screen, decrease the score by 10
         and remove the boulder object
 - [ ] Create a scale class

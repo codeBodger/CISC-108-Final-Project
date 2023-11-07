@@ -4,8 +4,9 @@ from boulder import Boulder
 
 GUTTER = 200
 
+
 class World:
-    boulders: [Boulder]
+    boulders: dict[int, Boulder]
     score: float
     text_score: DesignerObject
     
@@ -14,7 +15,7 @@ class World:
         Constructor for World.  Initialises the world with no boulders and a
             score of 0.
         """
-        self.boulders = []
+        self.boulders = {}
         self.score = 0.
         self.text_score = text('black', f"Score: {self.score:.4}",
                                30, get_width(), 20)
@@ -23,7 +24,7 @@ class World:
         """
         Loops through all of the boulders and moves them down.
         """
-        for boulder in self.boulders:
+        for boulder in self.boulders.values():
             boulder.move_down()
     
     def display_score(self):
