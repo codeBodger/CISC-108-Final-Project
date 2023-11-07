@@ -44,10 +44,12 @@ class Boulder:
         if self.boulder.y < -2 * self.boulder.height:
             self.boulder.destroy()
         else:
+            self.boulder.alpha = .5
             world.boulders[self.boulder.x] = self
             if len(world.boulders) == 1:
                 world.selected = self.boulder.x
-    
+                self.boulder.alpha = 1
+
     def is_colliding_somewhere(self, world: World) -> bool:
         """
         Checks if this boulder is colliding with any other boulders in the world.

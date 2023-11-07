@@ -47,6 +47,7 @@ class World:
         sorted_keys = sorted(list(self.boulders.keys()))
         for i, key in enumerate(sorted_keys):
             self.boulders[key].boulder.alpha = .5
+            
             if key == self.selected:
                 new_selected_index = i + pm_bool(right)
                 new_selected_index = new_selected_index % len(self.boulders)
@@ -114,6 +115,8 @@ def void_keyPressed(world: World, key: int):
             world.select_previous()
         case 'right':
             world.select_next()
+        case 'escape':
+            exit(-1)
         case _:
             print(key)
 
