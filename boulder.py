@@ -32,9 +32,10 @@ class Boulder:
                 to ensure that boulders don't overlap, and for the boulders to
                 be added to.
         """
+        from main import GUTTER
         self.boulder = emoji(
             "🪨",
-            randint(BOULDER_WIDTH//2, get_width() - BOULDER_WIDTH//2),
+            randint(BOULDER_WIDTH//2, get_width() - BOULDER_WIDTH//2 - GUTTER),
             0
         )
         self.boulder.scale = BOULDER_SCALE

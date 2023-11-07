@@ -2,9 +2,12 @@ from designer import *
 from boulder import Boulder
 
 
+GUTTER = 200
+
 class World:
     boulders: [Boulder]
     score: float
+    text_score: DesignerObject
     
     def __init__(self):
         """
@@ -13,6 +16,8 @@ class World:
         """
         self.boulders = []
         self.score = 0.
+        self.text_score = text('black', f"Score: {self.score:.4}",
+                               30, get_width(), 20)
     
     def move_boulders_down(self):
         """
@@ -20,6 +25,13 @@ class World:
         """
         for boulder in self.boulders:
             boulder.move_down()
+    
+    def display_score(self):
+        """
+        Displays the score off to the side of the screen.  Run each frame
+        """
+        self.text_score.text = f"Score: {self.score:.4}"
+        self.text_score.x = get_width() - (GUTTER - self.text_score.width//2)
 
 
 def void_draw(world: World):
@@ -35,6 +47,7 @@ def void_draw(world: World):
             functions called by this one.
     """
     world.move_boulders_down()
+    world.display_score()
 
 
 def main():
