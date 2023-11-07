@@ -45,6 +45,8 @@ class Boulder:
             self.boulder.destroy()
         else:
             world.boulders[self.boulder.x] = self
+            if len(world.boulders) == 1:
+                world.selected = self.boulder.x
     
     def is_colliding_somewhere(self, world: World) -> bool:
         """
