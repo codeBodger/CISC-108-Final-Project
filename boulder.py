@@ -76,6 +76,17 @@ class Boulder:
         """
         self.boulder.y -= self.boulder.height//2
     
+    def remove(self, world: World):
+        """
+        Removes this boulder from the game and from the dictionary of boulders.
+        If this boulder was selected, select the next one.
+        """
+        x = self.boulder.x
+        del world.boulders[self.boulder.x]
+        destroy(self.boulder)
+        if x == world.selected:
+            world.select_next()
+
     def move_down(self):
         """
         Moves the boulder down by BOULDER_SPEED.  This happens every frame.
