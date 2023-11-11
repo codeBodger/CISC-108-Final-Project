@@ -36,11 +36,10 @@ class Boulder:
                 be added to.
         """
         from main import GUTTER, SCALE_TYPE_INFO
-        self.boulder = emoji(
-            "🪨",
-            randint(BOULDER_WIDTH//2, get_width() - BOULDER_WIDTH//2 - GUTTER),
-            0
-        )
+        x = randint(BOULDER_WIDTH//2, get_width() - BOULDER_WIDTH//2 - GUTTER)
+        y = 0
+        
+        self.boulder = emoji("🪨", x, y)
         self.boulder.scale = BOULDER_SCALE
         while self.is_colliding_somewhere(world):
             self.shift_up()
@@ -52,11 +51,11 @@ class Boulder:
             if len(world.boulders) == 1:
                 world.selected = self.boulder.x
                 self.boulder.alpha = 1
-        
+    
         scale_type = choice(list(SCALE_TYPE_INFO.values()))
         self.scale = Scale(scale_type.pattern, choice(scale_type.possible_starts))
-        self.scale.make_text(self.boulder.x, self.boulder.y)
-
+        self.scale.make_text(x, y)
+    
     def is_colliding_somewhere(self, world: World) -> bool:
         """
         Checks if this boulder is colliding with any other boulders in the world.
