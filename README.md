@@ -30,7 +30,7 @@ they are guessing.
         and add the proper amount to the score.  If it doesn't (and a valid
         key was pressed), decrease the value of the boulder by 50%.  
   - [x] Generate the scale type, etc. randomly
-- [ ] For this milestone, we'll just display a list of note names without
+- [x] For this milestone, we'll just display a list of note names without
       octave numbers.  
 
 #### Milestone 2

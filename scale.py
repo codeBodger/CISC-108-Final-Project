@@ -13,7 +13,7 @@ from dataclasses import dataclass
 SHARP = '#'
 FLAT  = 'b'
 
-SCALE_TEXT_SIZE = 200
+SCALE_TEXT_SIZE = 20
 
 
 class Note:
@@ -129,7 +129,7 @@ class Note:
 class Scale:
     pattern: [int]
     starts_on: Note
-    display: DesignerObject = text('red', "", SCALE_TEXT_SIZE)
+    display: DesignerObject
     
     def __init__(self, pattern: str, starts_on: str):
         """
@@ -148,6 +148,22 @@ class Scale:
             raise Exception(f"InvalidScaleSizeError: {pattern}")
         
         self.starts_on = Note(starts_on)
+        self.display = text('red', "", SCALE_TEXT_SIZE)
+    
+    def __str__(self) -> str:
+        """
+        Convert the scale to text as simply a list of notes without octaves.
+
+        Returns:
+            str: The stringified scale
+        """
+        this_note = self.starts_on
+        disp_text = self.starts_on.string_form()
+        for up_by in self.pattern:
+            disp_text += " "
+            this_note = this_note.up_by(up_by, len(self.pattern))
+            disp_text += this_note.string_form()
+        return disp_text
     
     def make_text(self, x: int, y: int):
         """
@@ -159,16 +175,8 @@ class Scale:
         """
         self.display.x = x
         self.display.y = y
-        this_note = self.starts_on
-        disp_text = self.starts_on.string_form()
-        for up_by in self.pattern:
-            disp_text += " "
-            this_note = this_note.up_by(up_by, len(self.pattern))
-            disp_text += this_note.string_form()
-        self.display.text = disp_text
-        # print(get_width(self.display))
-        print(self.display.text)
-        
+        self.display.text = str(self)
+
     def move_down(self, speed: int):
         """
         Moves the text down by speed each frame.
@@ -178,6 +186,9 @@ class Scale:
                 It should always be BOULDER_SPEED
         """
         self.display.y += speed
+    
+    def remove(self):
+        destroy(self.display)
         
     
 @dataclass

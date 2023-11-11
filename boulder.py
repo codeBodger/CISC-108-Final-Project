@@ -87,6 +87,7 @@ class Boulder:
         Removes this boulder from the game and from the dictionary of boulders.
         If this boulder was selected, select the next one.
         """
+        self.scale.remove()
         x = self.boulder.x
         del world.boulders[self.boulder.x]
         destroy(self.boulder)
