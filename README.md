@@ -31,8 +31,8 @@ they are guessing.
         and add the proper amount to the score.  If it doesn't (and a valid
         key was pressed), decrease the value of the boulder by 50%.  
   - [x] Generate the scale type, etc. randomly
-- [ ] For this milestone, we'll just display a list of sharps/flats on the
-      boulders, assuming that the scale starts on C4 and has 7 notes in it.  
+- [ ] For this milestone, we'll just display a list of note names without
+      octave numbers.  
 
 #### Milestone 2
 - [ ] Figure out some way to display the sheet music for the scales, given a
