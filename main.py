@@ -1,10 +1,32 @@
 from designer import *
 from boulder import Boulder
-from useful_funcs import pm_bool
+from useful_funcs import pm_bool, int_from_pattern
+from scale import ScaleInfo
 
 
-GUTTER = 200
+GUTTER = 200  # How far away from the right to put the score and other info
 FAILED_BOULDER_PENALTY = -10
+
+# A dictionary to store some info about they types of scale, indexed with the
+# key that must be pressed to choose the type of scale
+SCALE_TYPE_INFO = {
+    "q": ScaleInfo("Major",          "WWHWWWH", [
+        "Cb4", "Gb4", "Db4", "Ab4", "Eb4", "Bb4", "F4",
+        "C4", "G4", "D4", "A4", "E4", "B4", "F#4", "C#4"
+    ]),
+    "w": ScaleInfo("Natural Minor",  "WHWWHWW", [
+        "Ab4", "Eb4", "Bb4", "F4", "C4", "G4", "D4",
+        "A4", "E4", "B4", "F#4", "C#4", "G#4", "D#4", "A#4"
+    ]),
+    "e": ScaleInfo("Harmonic Minor", "WHWWH3H", [
+        "Ab4", "Eb4", "Bb4", "F4", "C4", "G4", "D4",
+        "A4", "E4", "B4", "F#4", "C#4", "G#4", "D#4", "A#4"
+    ]),
+    "r": ScaleInfo("Melodic Minor",  "WHWWWWH", [
+        "Ab4", "Eb4", "Bb4", "F4", "C4", "G4", "D4",
+        "A4", "E4", "B4", "F#4", "C#4", "G#4", "D#4", "A#4"
+    ])
+}
 
 
 class World:
@@ -176,6 +198,18 @@ def void_keyPressed(world: World, key: int):
             world.select_previous()
         case 'right':
             world.select_next()
+        case 'q' | 'w' | 'e' | 'r':
+            if world.selected == 0:
+                return
+            selected_boulder = world.boulders[world.selected]
+            sb_pattern = selected_boulder.scale.pattern
+            guessed_pattern_str = SCALE_TYPE_INFO[key].pattern
+            guessed_pattern = [int_from_pattern(c) for c in guessed_pattern_str]
+            if sb_pattern == guessed_pattern:
+                world.score += selected_boulder.value
+                selected_boulder.remove(world)
+            else:
+                selected_boulder.value *= 0.50
         case 'escape':
             exit(-1)
         case _:

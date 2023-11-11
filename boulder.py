@@ -4,7 +4,8 @@ from typing import TYPE_CHECKING
 
 # Normal imports
 from designer import *
-from random import randint
+from random import randint, choice
+from scale import Scale
 
 if TYPE_CHECKING:
     from main import World
@@ -13,11 +14,13 @@ if TYPE_CHECKING:
 BOULDER_SCALE = 5
 BOULDER_WIDTH = BOULDER_SCALE * 34
 BOULDER_SPEED = 2
+BOULDER_BASE_POINTS = 1
 
 
 class Boulder:
-    # scale: Scale
+    scale: Scale
     boulder: DesignerObject
+    value: float = BOULDER_BASE_POINTS
     
     def __init__(self, world: World):
         """
@@ -32,7 +35,7 @@ class Boulder:
                 to ensure that boulders don't overlap, and for the boulders to
                 be added to.
         """
-        from main import GUTTER
+        from main import GUTTER, SCALE_TYPE_INFO
         self.boulder = emoji(
             "🪨",
             randint(BOULDER_WIDTH//2, get_width() - BOULDER_WIDTH//2 - GUTTER),
@@ -49,6 +52,10 @@ class Boulder:
             if len(world.boulders) == 1:
                 world.selected = self.boulder.x
                 self.boulder.alpha = 1
+        
+        scale_type = choice(list(SCALE_TYPE_INFO.values()))
+        self.scale = Scale(scale_type.pattern, choice(scale_type.possible_starts))
+        self.scale.make_text(self.boulder.x, self.boulder.y)
 
     def is_colliding_somewhere(self, world: World) -> bool:
         """
@@ -92,6 +99,7 @@ class Boulder:
         Moves the boulder down by BOULDER_SPEED.  This happens every frame.
         """
         self.boulder.y += BOULDER_SPEED
+        self.scale.move_down(BOULDER_SPEED)
 
 
 # Allows the program to be run starting in this file, in addition to main.py

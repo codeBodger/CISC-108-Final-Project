@@ -23,13 +23,13 @@ they are guessing.
   - [x] Allow the user to select different boulders using the L/R arrow keys
   - [x] When a boulder hits the bottom of the screen, decrease the score by 10
         and remove the boulder object
-- [ ] Create a scale class
-  - [ ] Store scale objects in boulder objects
-  - [ ] When a boulder is selected and a number key is pressed, check if it
+- [x] Create a scale class
+  - [x] Store scale objects in boulder objects
+  - [x] When a boulder is selected and a scale key is pressed, check if it
         corresponds with the right scale type.  If it does, remove the boulder
         and add the proper amount to the score.  If it doesn't (and a valid
-        number was entered), decrease the value of the boulder by 50%.  
-  - [ ] Generate the scale type, etc. randomly
+        key was pressed), decrease the value of the boulder by 50%.  
+  - [x] Generate the scale type, etc. randomly
 - [ ] For this milestone, we'll just display a list of sharps/flats on the
       boulders, assuming that the scale starts on C4 and has 7 notes in it.  
 
