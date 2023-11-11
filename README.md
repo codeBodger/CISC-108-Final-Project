@@ -17,7 +17,7 @@ they are guessing.
 
 ### Milestones
 #### Milestone 1
-## [Video Link:](https://youtu.be/jAdGS6ejogo)
+## [Video Link](https://youtu.be/jAdGS6ejogo)
 - [x] Create a boulder class
   - [x] Create the boulders randomly at the top of the screen
   - [x] Make the boulders fall
