@@ -40,8 +40,9 @@ class World:
         Constructor for World.  Initialises the world with no boulders and a
             score of 0.
         """
-        self.text_score = text('black', f"Score: {self.score:.4}",
-                               30, get_width(), 20)
+        self.text_score = text('black', f"{self.score:.4}",
+                               30, get_width(), 20,
+                               font_name="Game Font", font_path="Game Font.ttf")
     
     def move_boulders_down(self):
         """
@@ -54,7 +55,7 @@ class World:
         """
         Displays the score off to the side of the screen.  Run each frame
         """
-        self.text_score.text = f"Score: {self.score:.4}"
+        self.text_score.text = f"{self.score:.4}"
         self.text_score.x = get_width() - (GUTTER - self.text_score.width//2)
     
     def sorted_onscreen_boulder_keys(self) -> [int]:
