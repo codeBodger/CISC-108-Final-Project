@@ -211,7 +211,7 @@ def void_keyPressed(world: World, key: int):
             else:
                 selected_boulder.value *= 0.50
         case 'escape':
-            exit(-1)
+            exit(world.score)
         case _:
             print(key)
 
