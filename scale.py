@@ -152,7 +152,7 @@ class Scale:
         
         self.starts_on = Note(starts_on)
         self.background = rectangle('white', 0,0)
-        self.display = text('red', "", SCALE_TEXT_SIZE)
+        self.display = text('black', "", SCALE_TEXT_SIZE)
     
     def __str__(self) -> str:
         """
