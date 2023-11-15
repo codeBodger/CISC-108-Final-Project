@@ -14,6 +14,8 @@ SHARP = '#'
 FLAT  = 'b'
 
 SCALE_TEXT_SIZE = 20
+BACKGROUND_PADDING_W = 5
+BACKGROUND_PADDING_H = 5
 
 
 class Note:
@@ -129,6 +131,7 @@ class Note:
 class Scale:
     pattern: [int]
     starts_on: Note
+    background: DesignerObject
     display: DesignerObject
     
     def __init__(self, pattern: str, starts_on: str):
@@ -148,6 +151,7 @@ class Scale:
             raise Exception(f"InvalidScaleSizeError: {pattern}")
         
         self.starts_on = Note(starts_on)
+        self.background = rectangle('white', 0,0)
         self.display = text('red', "", SCALE_TEXT_SIZE)
     
     def __str__(self) -> str:
@@ -176,6 +180,11 @@ class Scale:
         self.display.x = x
         self.display.y = y
         self.display.text = str(self)
+        
+        self.background.x = x
+        self.background.y = y
+        self.background.width = self.display.width + 2*BACKGROUND_PADDING_W
+        self.background.height = self.display.height + 2*BACKGROUND_PADDING_H
 
     def move_down(self, speed: int):
         """
@@ -186,6 +195,7 @@ class Scale:
                 It should always be BOULDER_SPEED
         """
         self.display.y += speed
+        self.background.y += speed
     
     def remove(self):
         destroy(self.display)
