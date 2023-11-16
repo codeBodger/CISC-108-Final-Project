@@ -152,7 +152,10 @@ class Scale:
         
         self.starts_on = Note(starts_on)
         self.background = rectangle('white', 0,0)
-        self.display = text('black', "", SCALE_TEXT_SIZE)
+        self.display = text(
+            'black', "", SCALE_TEXT_SIZE,
+            font_name="Game Font", font_path="Game Font.ttf"
+        )
     
     def __str__(self) -> str:
         """
@@ -164,7 +167,7 @@ class Scale:
         this_note = self.starts_on
         disp_text = self.starts_on.string_form()
         for up_by in self.pattern:
-            disp_text += " "
+            # disp_text += " "
             this_note = this_note.up_by(up_by, len(self.pattern))
             disp_text += this_note.string_form()
         return disp_text
