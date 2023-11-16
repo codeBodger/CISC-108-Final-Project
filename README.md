@@ -36,12 +36,12 @@ they are guessing.
 #### Milestone 2
 - [ ] Figure out some way to display the sheet music for the scales, given a
       type, starting note, and clef
-  - [ ] Ensure that the scales are displayed on top of the boulders
-  - [ ] Ensure that the scales fall with the boulders
-  - [ ] Ensure that scales fit within the specs of the default settings
+  - [x] Ensure that the scales are displayed on top of the boulders
+  - [x] Ensure that the scales fall with the boulders
+  - [x] Ensure that scales fit within the specs of the default settings
 - [ ] Increase the speed that the boulders fall as the player gets more correct
-- [ ] If the player presses `escape`, end the game
-- [ ] Display the score to the user near the right of the screen
+- [x] If the player presses `escape`, end the game
+- [x] Display the score to the user near the right of the screen
 - [ ] Display a list with the numbers that correspond to each scale type below
       the score
 - [ ] If the player presses `space`, pause the game and blur the boulders
