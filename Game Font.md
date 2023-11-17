@@ -8,7 +8,7 @@ properly for this.
 #### Ascii Block
 ###### Semantic Accidental Symbols
 - Flat: b
-- Natural: c
+- Natural: h
 - Sharp: #
 - Double Sharp: x
 
@@ -18,19 +18,24 @@ properly for this.
 - Minus sign: -
 
 ###### Notes
-- Two ledger lines below : two above: A:Q / U+0041:U+0051
+- Two ledger lines below : two above: U+E001:U+E011
 - Single Whole note: o 
 ###### Clefs:
-- Bass: f
-- Treble: g
-- C-Clef: h:l
+- Bass: U+E0A9
+- Treble: U+E0AE
+- C-Clef:
+  - Baritone: U+E0AB
+  - Tenor: U+E0AD
+  - Alto: U+E0AF
+  - Mezzo-soprano: U+E0AA
+  - Soprano: U+E0AC
 
 #### Accidentals and Key Signatures Block
 ###### Ranges
-- Flats start at U+00A0
-- Naturals start at U+00C0
-- Sharps start at U+00E0
-- Double Sharps start at U+0100
+- Flats start at U+E020
+- Naturals start at U+E040
+- Sharps start at U+E060
+- Double Sharps start at U+E080
 
 ###### Specs within each Range
 - START + 0x00: Blank staff spacer for double accidentals and key signatures
