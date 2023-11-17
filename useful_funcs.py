@@ -62,6 +62,14 @@ def get_next_letter(letter: str) -> str:
     return chr(num + ord('A'))
 
 
+def cmp(a, b) -> int:
+    """
+    Returns:
+        int: 0 if a and b are the same, -1 if a < b, 1 if a > b
+    """
+    return (a > b) - (a < b)
+
+
 # Allows the program to be run starting in this file, in addition to main.py
 if __name__ == "__main__":
     # from main import main
