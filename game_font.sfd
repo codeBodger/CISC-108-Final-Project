@@ -1,7 +1,7 @@
 SplineFontDB: 3.2
-FontName: Game Font
+FontName: Game_Font
 FullName: Game Font
-FamilyName: Game Font
+FamilyName: Game_Font
 Weight: Book
 Copyright: Copyright (c) 2020, MuseScore BVBA (http://www.musescore.org/)
 Version: 0.5
@@ -16,14 +16,14 @@ LayerCount: 2
 Layer: 0 1 "Back" 1
 Layer: 1 1 "Fore" 0
 HasVMetrics: 1
-XUID: [1021 985 745227502 32200]
+XUID: [1021 985 745227502 21427]
 StyleMap: 0x0040
 FSType: 0
 OS2Version: 4
 OS2_WeightWidthSlopeOnly: 0
 OS2_UseTypoMetrics: 0
 CreationTime: 1536333813
-ModificationTime: 1700100842
+ModificationTime: 1700181148
 PfmFamily: 81
 TTFWeight: 400
 TTFWidth: 5
@@ -58,6 +58,7 @@ OS2XHeight: 282
 OS2Vendor: 'PfEd'
 OS2CodePages: 00000001.00000000
 OS2UnicodeRanges: 00000000.10000000.00000000.00000000
+Lookup: 4 0 1 "'liga' Make Double Sharps" { "'liga' Make Double Sharps-1"  } ['liga' ('DFLT' <'dflt' > 'latn' <'dflt' > ) ]
 MarkAttachClasses: 1
 DEI: 91125
 ShortTable: cvt  2
@@ -82,7 +83,7 @@ ShortTable: maxp 16
   0
   0
 EndShort
-LangName: 1033 "Copyright +AKkA 2020, MuseScore BVBA (http://www.musescore.org/)" "" "Regular" "FontForge 2.0 : Game Font : 16-6-2021" "" "Version 0.5" "" "Leland is a registered trademark of MuseScore BVBA in the European Union and other territories" "MuseScore" "Martin Keary & Simon Smith" "Copyright +AKkA 2020, MuseScore BVBA (http://www.musescore.org/)" "http://www.musescore.org/" "http://www.musescore.org/" "Copyright +AKkA 2020, MuseScore BVBA (http://www.musescore.org/),+AAoA-with Reserved Font Name Leland.+AAoACgAA-This Font Software is licensed under the SIL Open Font License, Version 1.1.+AAoA-This license is copied below, and is also available with a FAQ at:+AAoA-http://scripts.sil.org/OFL+AAoACgAK------------------------------------------------------------+AAoA-SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007+AAoA------------------------------------------------------------+AAoACgAA-PREAMBLE+AAoA-The goals of the Open Font License (OFL) are to stimulate worldwide+AAoA-development of collaborative font projects, to support the font creation+AAoA-efforts of academic and linguistic communities, and to provide a free and+AAoA-open framework in which fonts may be shared and improved in partnership+AAoA-with others.+AAoACgAA-The OFL allows the licensed fonts to be used, studied, modified and+AAoA-redistributed freely as long as they are not sold by themselves. The+AAoA-fonts, including any derivative works, can be bundled, embedded, +AAoA-redistributed and/or sold with any software provided that any reserved+AAoA-names are not used by derivative works. The fonts and derivatives,+AAoA-however, cannot be released under any other type of license. The+AAoA-requirement for fonts to remain under this license does not apply+AAoA-to any document created using the fonts or their derivatives.+AAoACgAA-DEFINITIONS+AAoAIgAA-Font Software+ACIA refers to the set of files released by the Copyright+AAoA-Holder(s) under this license and clearly marked as such. This may+AAoA-include source files, build scripts and documentation.+AAoACgAi-Reserved Font Name+ACIA refers to any names specified as such after the+AAoA-copyright statement(s).+AAoACgAi-Original Version+ACIA refers to the collection of Font Software components as+AAoA-distributed by the Copyright Holder(s).+AAoACgAi-Modified Version+ACIA refers to any derivative made by adding to, deleting,+AAoA-or substituting -- in part or in whole -- any of the components of the+AAoA-Original Version, by changing formats or by porting the Font Software to a+AAoA-new environment.+AAoACgAi-Author+ACIA refers to any designer, engineer, programmer, technical+AAoA-writer or other person who contributed to the Font Software.+AAoACgAA-PERMISSION & CONDITIONS+AAoA-Permission is hereby granted, free of charge, to any person obtaining+AAoA-a copy of the Font Software, to use, study, copy, merge, embed, modify,+AAoA-redistribute, and sell modified and unmodified copies of the Font+AAoA-Software, subject to the following conditions:+AAoACgAA-1) Neither the Font Software nor any of its individual components,+AAoA-in Original or Modified Versions, may be sold by itself.+AAoACgAA-2) Original or Modified Versions of the Font Software may be bundled,+AAoA-redistributed and/or sold with any software, provided that each copy+AAoA-contains the above copyright notice and this license. These can be+AAoA-included either as stand-alone text files, human-readable headers or+AAoA-in the appropriate machine-readable metadata fields within text or+AAoA-binary files as long as those fields can be easily viewed by the user.+AAoACgAA-3) No Modified Version of the Font Software may use the Reserved Font+AAoA-Name(s) unless explicit written permission is granted by the corresponding+AAoA-Copyright Holder. This restriction only applies to the primary font name as+AAoA-presented to the users.+AAoACgAA-4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font+AAoA-Software shall not be used to promote, endorse or advertise any+AAoA-Modified Version, except to acknowledge the contribution(s) of the+AAoA-Copyright Holder(s) and the Author(s) or with their explicit written+AAoA-permission.+AAoACgAA-5) The Font Software, modified or unmodified, in part or in whole,+AAoA-must be distributed entirely under this license, and must not be+AAoA-distributed under any other license. The requirement for fonts to+AAoA-remain under this license does not apply to any document created+AAoA-using the Font Software.+AAoACgAA-TERMINATION+AAoA-This license becomes null and void if any of the above conditions are+AAoA-not met.+AAoACgAA-DISCLAIMER+AAoA-THE FONT SOFTWARE IS PROVIDED +ACIA-AS IS+ACIA, WITHOUT WARRANTY OF ANY KIND,+AAoA-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF+AAoA-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT+AAoA-OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE+AAoA-COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,+AAoA-INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL+AAoA-DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING+AAoA-FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM+AAoA-OTHER DEALINGS IN THE FONT SOFTWARE." "http://scripts.sil.org/OFL"
+LangName: 1033 "Copyright +AKkA 2020, MuseScore BVBA (http://www.musescore.org/)" "" "Regular" "" "" "Version 0.5" "" "Leland is a registered trademark of MuseScore BVBA in the European Union and other territories" "MuseScore" "Martin Keary & Simon Smith" "Copyright +AKkA 2020, MuseScore BVBA (http://www.musescore.org/)" "http://www.musescore.org/" "http://www.musescore.org/" "Copyright +AKkA 2020, MuseScore BVBA (http://www.musescore.org/),+AAoA-with Reserved Font Name Leland.+AAoACgAA-This Font Software is licensed under the SIL Open Font License, Version 1.1.+AAoA-This license is copied below, and is also available with a FAQ at:+AAoA-http://scripts.sil.org/OFL+AAoACgAK------------------------------------------------------------+AAoA-SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007+AAoA------------------------------------------------------------+AAoACgAA-PREAMBLE+AAoA-The goals of the Open Font License (OFL) are to stimulate worldwide+AAoA-development of collaborative font projects, to support the font creation+AAoA-efforts of academic and linguistic communities, and to provide a free and+AAoA-open framework in which fonts may be shared and improved in partnership+AAoA-with others.+AAoACgAA-The OFL allows the licensed fonts to be used, studied, modified and+AAoA-redistributed freely as long as they are not sold by themselves. The+AAoA-fonts, including any derivative works, can be bundled, embedded, +AAoA-redistributed and/or sold with any software provided that any reserved+AAoA-names are not used by derivative works. The fonts and derivatives,+AAoA-however, cannot be released under any other type of license. The+AAoA-requirement for fonts to remain under this license does not apply+AAoA-to any document created using the fonts or their derivatives.+AAoACgAA-DEFINITIONS+AAoAIgAA-Font Software+ACIA refers to the set of files released by the Copyright+AAoA-Holder(s) under this license and clearly marked as such. This may+AAoA-include source files, build scripts and documentation.+AAoACgAi-Reserved Font Name+ACIA refers to any names specified as such after the+AAoA-copyright statement(s).+AAoACgAi-Original Version+ACIA refers to the collection of Font Software components as+AAoA-distributed by the Copyright Holder(s).+AAoACgAi-Modified Version+ACIA refers to any derivative made by adding to, deleting,+AAoA-or substituting -- in part or in whole -- any of the components of the+AAoA-Original Version, by changing formats or by porting the Font Software to a+AAoA-new environment.+AAoACgAi-Author+ACIA refers to any designer, engineer, programmer, technical+AAoA-writer or other person who contributed to the Font Software.+AAoACgAA-PERMISSION & CONDITIONS+AAoA-Permission is hereby granted, free of charge, to any person obtaining+AAoA-a copy of the Font Software, to use, study, copy, merge, embed, modify,+AAoA-redistribute, and sell modified and unmodified copies of the Font+AAoA-Software, subject to the following conditions:+AAoACgAA-1) Neither the Font Software nor any of its individual components,+AAoA-in Original or Modified Versions, may be sold by itself.+AAoACgAA-2) Original or Modified Versions of the Font Software may be bundled,+AAoA-redistributed and/or sold with any software, provided that each copy+AAoA-contains the above copyright notice and this license. These can be+AAoA-included either as stand-alone text files, human-readable headers or+AAoA-in the appropriate machine-readable metadata fields within text or+AAoA-binary files as long as those fields can be easily viewed by the user.+AAoACgAA-3) No Modified Version of the Font Software may use the Reserved Font+AAoA-Name(s) unless explicit written permission is granted by the corresponding+AAoA-Copyright Holder. This restriction only applies to the primary font name as+AAoA-presented to the users.+AAoACgAA-4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font+AAoA-Software shall not be used to promote, endorse or advertise any+AAoA-Modified Version, except to acknowledge the contribution(s) of the+AAoA-Copyright Holder(s) and the Author(s) or with their explicit written+AAoA-permission.+AAoACgAA-5) The Font Software, modified or unmodified, in part or in whole,+AAoA-must be distributed entirely under this license, and must not be+AAoA-distributed under any other license. The requirement for fonts to+AAoA-remain under this license does not apply to any document created+AAoA-using the Font Software.+AAoACgAA-TERMINATION+AAoA-This license becomes null and void if any of the above conditions are+AAoA-not met.+AAoACgAA-DISCLAIMER+AAoA-THE FONT SOFTWARE IS PROVIDED +ACIA-AS IS+ACIA, WITHOUT WARRANTY OF ANY KIND,+AAoA-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF+AAoA-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT+AAoA-OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE+AAoA-COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,+AAoA-INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL+AAoA-DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING+AAoA-FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM+AAoA-OTHER DEALINGS IN THE FONT SOFTWARE." "http://scripts.sil.org/OFL"
 GaspTable: 1 65535 2 0
 Encoding: UnicodeBmp
 UnicodeInterp: none
@@ -91,7 +92,9 @@ DisplaySize: -48
 AntiAlias: 1
 FitToEm: 0
 WinInfo: 0 32 14
-BeginChars: 65539 125
+BeginPrivate: 0
+EndPrivate
+BeginChars: 65539 126
 
 StartChar: .notdef
 Encoding: 65536 -1 0
@@ -857,7 +860,7 @@ SplineSet
  317 732 l 5,96,-1
  200 732 l 5,89,-1
 EndSplineSet
-Validated: 524289
+Validated: 1
 EndChar
 
 StartChar: B
@@ -945,7 +948,7 @@ SplineSet
  317 732 l 1,82,-1
  200 732 l 1,75,-1
 EndSplineSet
-Validated: 524289
+Validated: 1
 EndChar
 
 StartChar: C
@@ -1040,7 +1043,7 @@ SplineSet
  317 732 l 1,95,-1
  200 732 l 1,88,-1
 EndSplineSet
-Validated: 524289
+Validated: 1
 EndChar
 
 StartChar: D
@@ -1124,7 +1127,7 @@ SplineSet
  317 732 l 1,81,-1
  200 732 l 1,74,-1
 EndSplineSet
-Validated: 524289
+Validated: 1
 EndChar
 
 StartChar: E
@@ -1212,7 +1215,7 @@ SplineSet
  317 732 l 1,89,-1
  200 732 l 1,82,-1
 EndSplineSet
-Validated: 524289
+Validated: 1
 EndChar
 
 StartChar: F
@@ -1296,7 +1299,7 @@ SplineSet
  317 732 l 1,85,-1
  200 732 l 1,78,-1
 EndSplineSet
-Validated: 524289
+Validated: 1
 EndChar
 
 StartChar: G
@@ -1384,7 +1387,7 @@ SplineSet
  317 732 l 1,89,-1
  200 732 l 1,82,-1
 EndSplineSet
-Validated: 524289
+Validated: 1
 EndChar
 
 StartChar: I
@@ -1472,7 +1475,7 @@ SplineSet
  317 732 l 1,89,-1
  200 732 l 1,82,-1
 EndSplineSet
-Validated: 524289
+Validated: 1
 EndChar
 
 StartChar: J
@@ -1556,7 +1559,7 @@ SplineSet
  317 732 l 1,85,-1
  200 732 l 1,78,-1
 EndSplineSet
-Validated: 524289
+Validated: 1
 EndChar
 
 StartChar: K
@@ -1643,7 +1646,7 @@ SplineSet
  317 732 l 1,87,-1
  200 732 l 1,80,-1
 EndSplineSet
-Validated: 524289
+Validated: 1
 EndChar
 
 StartChar: L
@@ -1727,7 +1730,7 @@ SplineSet
  317 404 l 1,83,-1
  200 404 l 1,76,-1
 EndSplineSet
-Validated: 524289
+Validated: 1
 EndChar
 
 StartChar: M
@@ -1814,7 +1817,7 @@ SplineSet
  317 568 l 1,87,-1
  200 568 l 1,80,-1
 EndSplineSet
-Validated: 524289
+Validated: 1
 EndChar
 
 StartChar: N
@@ -1897,7 +1900,7 @@ SplineSet
  317 568 l 1,79,-1
  200 568 l 1,72,-1
 EndSplineSet
-Validated: 524289
+Validated: 1
 EndChar
 
 StartChar: O
@@ -1991,7 +1994,7 @@ SplineSet
  317 732 l 1,93,-1
  200 732 l 1,86,-1
 EndSplineSet
-Validated: 524289
+Validated: 1
 EndChar
 
 StartChar: Q
@@ -2091,7 +2094,7 @@ SplineSet
  317 732 l 1,99,-1
  200 732 l 1,92,-1
 EndSplineSet
-Validated: 524289
+Validated: 1
 EndChar
 
 StartChar: exclamdown
@@ -4029,7 +4032,7 @@ SplineSet
  317 732 l 1,85,-1
  200 732 l 1,78,-1
 EndSplineSet
-Validated: 524289
+Validated: 1
 EndChar
 
 StartChar: P
@@ -4117,7 +4120,7 @@ SplineSet
  317 732 l 1,86,-1
  200 732 l 1,79,-1
 EndSplineSet
-Validated: 524289
+Validated: 1
 EndChar
 
 StartChar: period
@@ -5266,7 +5269,7 @@ SplineSet
  138 241 l 1,210,-1
  93 241 l 1,207,-1
 EndSplineSet
-Validated: 524289
+Validated: 1
 EndChar
 
 StartChar: h
@@ -5432,7 +5435,7 @@ SplineSet
  138 241 l 1,196,-1
  93 241 l 1,193,-1
 EndSplineSet
-Validated: 524289
+Validated: 1
 EndChar
 
 StartChar: j
@@ -5628,7 +5631,7 @@ SplineSet
  138 241 l 1,232,-1
  93 241 l 1,229,-1
 EndSplineSet
-Validated: 524321
+Validated: 33
 EndChar
 
 StartChar: k
@@ -5806,7 +5809,7 @@ SplineSet
  138 404 l 1,211,-1
  93 404 l 1,208,-1
 EndSplineSet
-Validated: 524289
+Validated: 1
 EndChar
 
 StartChar: l
@@ -5972,7 +5975,7 @@ SplineSet
  138 568 l 1,196,-1
  93 568 l 1,193,-1
 EndSplineSet
-Validated: 524289
+Validated: 1
 EndChar
 
 StartChar: c
@@ -6214,6 +6217,7 @@ SplineSet
  185.1328125 -259.466796875 l 1,51,-1
  153.466796875 -289.8671875 l 1,0,-1
 EndSplineSet
+Ligature2: "'liga' Make Double Sharps-1" aacute aacute
 EndChar
 
 StartChar: abreve
@@ -6265,6 +6269,7 @@ SplineSet
  185.1328125 -95.466796875 l 5,51,-1
  153.466796875 -125.8671875 l 5,0,-1
 EndSplineSet
+Ligature2: "'liga' Make Double Sharps-1" atilde atilde
 EndChar
 
 StartChar: aogonek
@@ -6316,6 +6321,7 @@ SplineSet
  185.1328125 68.533203125 l 1,51,-1
  153.466796875 38.1328125 l 1,0,-1
 EndSplineSet
+Ligature2: "'liga' Make Double Sharps-1" aring aring
 EndChar
 
 StartChar: Abreve
@@ -6367,6 +6373,7 @@ SplineSet
  185.1328125 -177.466796875 l 5,51,-1
  153.466796875 -207.8671875 l 5,0,-1
 EndSplineSet
+Ligature2: "'liga' Make Double Sharps-1" acircumflex acircumflex
 EndChar
 
 StartChar: Aogonek
@@ -6418,6 +6425,7 @@ SplineSet
  185.1328125 -13.466796875 l 5,51,-1
  153.466796875 -43.8671875 l 5,0,-1
 EndSplineSet
+Ligature2: "'liga' Make Double Sharps-1" adieresis adieresis
 EndChar
 
 StartChar: Cacute
@@ -6469,6 +6477,7 @@ SplineSet
  185.1328125 150.533203125 l 5,51,-1
  153.466796875 120.1328125 l 5,0,-1
 EndSplineSet
+Ligature2: "'liga' Make Double Sharps-1" ae ae
 EndChar
 
 StartChar: cacute
@@ -6520,6 +6529,7 @@ SplineSet
  185.1328125 232.533203125 l 1,51,-1
  153.466796875 202.1328125 l 1,0,-1
 EndSplineSet
+Ligature2: "'liga' Make Double Sharps-1" ccedilla ccedilla
 EndChar
 
 StartChar: Ccircumflex
@@ -6571,6 +6581,7 @@ SplineSet
  185.1328125 314.533203125 l 5,51,-1
  153.466796875 284.1328125 l 5,0,-1
 EndSplineSet
+Ligature2: "'liga' Make Double Sharps-1" egrave egrave
 EndChar
 
 StartChar: ccircumflex
@@ -6622,6 +6633,7 @@ SplineSet
  185.1328125 396.533203125 l 5,51,-1
  153.466796875 366.1328125 l 5,0,-1
 EndSplineSet
+Ligature2: "'liga' Make Double Sharps-1" eacute eacute
 EndChar
 
 StartChar: Cdotaccent
@@ -6673,6 +6685,7 @@ SplineSet
  185.1328125 478.533203125 l 5,51,-1
  153.466796875 448.1328125 l 5,0,-1
 EndSplineSet
+Ligature2: "'liga' Make Double Sharps-1" ecircumflex ecircumflex
 EndChar
 
 StartChar: cdotaccent
@@ -6724,6 +6737,7 @@ SplineSet
  185.1328125 560.533203125 l 1,51,-1
  153.466796875 530.1328125 l 1,0,-1
 EndSplineSet
+Ligature2: "'liga' Make Double Sharps-1" edieresis edieresis
 EndChar
 
 StartChar: Ccaron
@@ -6775,6 +6789,7 @@ SplineSet
  185.1328125 642.533203125 l 5,51,-1
  153.466796875 612.1328125 l 5,0,-1
 EndSplineSet
+Ligature2: "'liga' Make Double Sharps-1" igrave igrave
 EndChar
 
 StartChar: ccaron
@@ -6826,6 +6841,7 @@ SplineSet
  185.1328125 724.533203125 l 1,51,-1
  153.466796875 694.1328125 l 1,0,-1
 EndSplineSet
+Ligature2: "'liga' Make Double Sharps-1" iacute iacute
 EndChar
 
 StartChar: Dcaron
@@ -6877,6 +6893,7 @@ SplineSet
  185.1328125 806.533203125 l 5,51,-1
  153.466796875 776.1328125 l 5,0,-1
 EndSplineSet
+Ligature2: "'liga' Make Double Sharps-1" icircumflex icircumflex
 EndChar
 
 StartChar: dcaron
@@ -6928,6 +6945,7 @@ SplineSet
  185.1328125 888.533203125 l 5,51,-1
  153.466796875 858.1328125 l 5,0,-1
 EndSplineSet
+Ligature2: "'liga' Make Double Sharps-1" idieresis idieresis
 EndChar
 
 StartChar: Dcroat
@@ -6979,6 +6997,7 @@ SplineSet
  185.1328125 970.533203125 l 5,51,-1
  153.466796875 940.1328125 l 5,0,-1
 EndSplineSet
+Ligature2: "'liga' Make Double Sharps-1" eth eth
 EndChar
 
 StartChar: dcroat
@@ -7030,6 +7049,7 @@ SplineSet
  185.1328125 1052.53320312 l 1,51,-1
  153.466796875 1022.1328125 l 1,0,-1
 EndSplineSet
+Ligature2: "'liga' Make Double Sharps-1" ntilde ntilde
 EndChar
 
 StartChar: Amacron
@@ -7100,6 +7120,61 @@ SplineSet
  109 220 109 220 103 211 c 0,32,33
  100 205 100 205 100 197 c 2,34,-1
  100 190 l 1,8,9
+EndSplineSet
+EndChar
+
+StartChar: at
+Encoding: 64 64 125
+Width: 681
+Flags: W
+LayerCount: 2
+Fore
+SplineSet
+200 77 m 1,0,-1
+ 0 77 l 1,1,-1
+ 0 87 l 1,2,-1
+ 200 87 l 1,3,-1
+ 317 87 l 1,4,-1
+ 732 87 l 1,5,-1
+ 732 77 l 1,6,-1
+ 317 77 l 1,7,-1
+ 200 77 l 1,0,-1
+200 241 m 1,8,-1
+ 0 241 l 1,9,-1
+ 0 251 l 1,10,-1
+ 200 251 l 1,11,-1
+ 317 251 l 1,12,-1
+ 732 251 l 1,13,-1
+ 732 241 l 1,14,-1
+ 317 241 l 1,15,-1
+ 200 241 l 1,8,-1
+200 404 m 1,16,-1
+ 0 404 l 1,17,-1
+ 0 415 l 1,18,-1
+ 200 415 l 1,19,-1
+ 317 415 l 1,20,-1
+ 732 415 l 1,21,-1
+ 732 404 l 1,22,-1
+ 317 404 l 1,23,-1
+ 200 404 l 1,16,-1
+200 568 m 1,24,-1
+ 0 568 l 1,25,-1
+ 0 579 l 1,26,-1
+ 200 579 l 1,27,-1
+ 317 579 l 1,28,-1
+ 732 579 l 1,29,-1
+ 732 568 l 1,30,-1
+ 317 568 l 1,31,-1
+ 200 568 l 1,24,-1
+200 732 m 1,32,-1
+ 0 732 l 1,33,-1
+ 0 742 l 1,34,-1
+ 200 742 l 1,35,-1
+ 317 742 l 1,36,-1
+ 732 742 l 1,37,-1
+ 732 732 l 1,38,-1
+ 317 732 l 1,39,-1
+ 200 732 l 1,32,-1
 EndSplineSet
 EndChar
 EndChars
