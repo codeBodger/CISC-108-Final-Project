@@ -34,7 +34,7 @@ they are guessing.
       octave numbers.  
 
 #### Milestone 2
-- [ ] Figure out some way to display the sheet music for the scales, given a
+- [x] Figure out some way to display the sheet music for the scales, given a
       type, starting note, and clef
   - [x] Ensure that the scales are displayed on top of the boulders
   - [x] Ensure that the scales fall with the boulders
