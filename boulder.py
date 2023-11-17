@@ -54,7 +54,7 @@ class Boulder:
     
         scale_type = choice(list(SCALE_TYPE_INFO.values()))
         self.scale = Scale(scale_type.pattern, choice(scale_type.possible_starts))
-        self.scale.make_text(x, y)
+        self.scale.make_text(self.boulder.x, self.boulder.y)
     
     def is_colliding_somewhere(self, world: World) -> bool:
         """
