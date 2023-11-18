@@ -1,7 +1,7 @@
 from designer import *
 from designer import __version__ as DESIGNER_VERSION
 from boulder import Boulder
-from useful_funcs import pm_bool, int_from_pattern, ensure_version
+from useful_funcs import pm_bool, int_from_pattern, ensure_version, MatchStr, MatchIter
 from scale import ScaleInfo
 
 
@@ -196,7 +196,7 @@ def void_draw(world: World):
     world.display_score()
 
 
-def void_keyPressed(world: World, key: int):
+def void_keyPressed(world: World, key: str):
     """
     This function is just a handler for all of the things that need to happen on
         keypress.  It also handles the different things that need to happen when
@@ -209,14 +209,18 @@ def void_keyPressed(world: World, key: int):
             functions called by this one.
         key (str): The key that was pressed.
     """
-    match key:
+    keys = MatchIter(SCALE_TYPE_INFO)
+    
+    print()
+    a = str(key)
+    match MatchStr(a):
         case 'space':
             Boulder(world)
         case 'left':
             world.select_previous()
         case 'right':
             world.select_next()
-        case 'q' | 'w' | 'e' | 'r':
+        case keys.value:
             if world.selected == 0:
                 return
             selected_boulder = world.boulders[world.selected]

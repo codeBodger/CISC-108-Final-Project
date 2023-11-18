@@ -1,3 +1,8 @@
+from typing import Union
+from collections.abc import Iterable
+from dataclasses import dataclass
+
+
 def pm_bool(b: bool) -> int:
     """
     Converts a boolean to +-1
@@ -9,7 +14,7 @@ def pm_bool(b: bool) -> int:
     Returns:
         int: Either 1 or -1, depending on b
     """
-    return b*2 -1
+    return b * 2 - 1
 
 
 def int_from_pattern(pattern_char: str) -> int:
@@ -32,8 +37,8 @@ def int_from_pattern(pattern_char: str) -> int:
             return 3
         case _:
             return 0
-    
-    
+
+
 def ensure_octave(pattern: [int]) -> bool:
     """
     Ensures that the input scale pattern fits exactly in an octave.
@@ -104,3 +109,27 @@ def boulder_speed(score: float, base_speed: int) -> float:
     if score < 1:
         return base_speed
     return base_speed * (1 + ((score - 1) / 30) ** .9)
+
+
+@dataclass
+class MatchIter:
+    value: Iterable
+    
+
+class MatchStr(str):
+    def __eq__(self, match_list: Union[Iterable, str]) -> bool:
+        """
+        Checks if the value of the MatchStr is in the list, or if it is equal to
+            the string.
+        
+        Args:
+            match_list (Iterable or str): The list or string to check against
+
+        Returns:
+            bool: Whether or not the value of the MatchStr is in the list or is
+                equal to the string
+        """
+        if isinstance(match_list, str):
+            return match_list.__eq__(self)
+        else:
+            return self in list(match_list)
