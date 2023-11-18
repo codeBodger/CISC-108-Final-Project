@@ -71,8 +71,36 @@ def cmp(a, b) -> int:
 
 
 def ensure_version(actual: str, required: str) -> bool:
+    """
+    Tests if the version of a program/module is high enough.
+    
+    Args:
+        actual (str): The actual version that we're testing
+        required (str): The minimum version that we're testing against
+
+    Returns:
+        bool: Whether or not the program/module is new enough
+    """
     return (
             tuple(map(int, (actual.split("."))))
             >=
             tuple(map(int, (required.split("."))))
     )
+
+
+def boulder_speed(score: float, base_speed: int) -> float:
+    """
+    Finds the speed with which to move the boulders down, given the player's
+        current score.
+    
+    Args:
+        score (int): The player's score
+        base_speed (int): The base speed of the boulders, when the score is less
+            than 1
+
+    Returns:
+        int: The speed for the boulders
+    """
+    if score < 1:
+        return base_speed
+    return base_speed * (1 + ((score - 1) / 30) ** .9)

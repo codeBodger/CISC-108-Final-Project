@@ -39,7 +39,7 @@ guessing.
   - [x] Ensure that the scales are displayed on top of the boulders
   - [x] Ensure that the scales fall with the boulders
   - [x] Ensure that scales fit within the specs of the default settings
-- [ ] Increase the speed that the boulders fall as the player gets more correct
+- [x] Increase the speed that the boulders fall as the player gets more correct
 - [x] If the player presses `escape`, end the game
 - [x] Display the score to the user near the right of the screen
 - [x] Display a list with the keys that correspond to each scale type below the

@@ -358,7 +358,7 @@ class Scale:
         self.background.width = 176
         self.background.height = 60
 
-    def move_down(self, speed: int):
+    def move_down(self, speed: float):
         """
         Moves the text down by speed each frame.
         

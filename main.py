@@ -64,7 +64,7 @@ class World:
         Loops through all of the boulders and moves them down.
         """
         for boulder in self.boulders.values():
-            boulder.move_down()
+            boulder.move_down(self)
     
     def display_score(self):
         """

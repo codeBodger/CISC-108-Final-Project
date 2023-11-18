@@ -6,6 +6,7 @@ from typing import TYPE_CHECKING
 from designer import *
 from random import randint, choice
 from scale import Scale
+from useful_funcs import boulder_speed
 
 if TYPE_CHECKING:
     from main import World
@@ -13,6 +14,7 @@ if TYPE_CHECKING:
 
 BOULDER_SCALE = 5
 BOULDER_WIDTH = BOULDER_SCALE * 34
+BOULDER_BASE_SPEED = 1
 BOULDER_SPEED = 2
 BOULDER_BASE_POINTS = 1
 
@@ -94,9 +96,10 @@ class Boulder:
         if x == world.selected:
             world.select_next()
 
-    def move_down(self):
+    def move_down(self, world: World):
         """
         Moves the boulder down by BOULDER_SPEED.  This happens every frame.
         """
-        self.boulder.y += BOULDER_SPEED
-        self.scale.move_down(BOULDER_SPEED)
+        speed = boulder_speed(world.score, BOULDER_BASE_SPEED)
+        self.boulder.y += speed
+        self.scale.move_down(speed)
