@@ -201,6 +201,8 @@ def void_keyPressed(world: World, key: int):
     This function is just a handler for all of the things that need to happen on
         keypress.  It also handles the different things that need to happen when
         different keys are pressed.
+    Note: this function name is partially in camelCase because I'm using a name
+        analogous to that used for the purpose in Processing.
     
     Args:
         world (World): The world for the game.  Well be used by some of the
