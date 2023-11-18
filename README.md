@@ -44,7 +44,7 @@ guessing.
 - [x] Display the score to the user near the right of the screen
 - [x] Display a list with the keys that correspond to each scale type below the
       score
-- [ ] Automatically generate the boulders, rather than requiring the player to
+- [x] Automatically generate the boulders, rather than requiring the player to
       press `space` to generate them
 - [ ] If the player presses `space`, pause the game and blur the boulders
 

@@ -1,5 +1,6 @@
 from designer import *
 from designer import __version__ as DESIGNER_VERSION
+from random import random as rand
 from boulder import Boulder
 from useful import pm_bool, int_from_pattern, ensure_version, MatchStr, MatchIter
 from scale import ScaleInfo
@@ -9,6 +10,9 @@ MIN_DESIGNER_VERSION = "0.6.3"
 
 GUTTER = 200  # How far away from the right to put the score and other info
 FAILED_BOULDER_PENALTY = -10
+
+BOULDER_BASE_PROB = 2**-10
+MAX_BOULDERS = 4
 
 # A dictionary to store some info about they types of scale, indexed with the
 # key that must be pressed to choose the type of scale
@@ -58,7 +62,7 @@ class World:
                      get_width() - GUTTER, 80 + 40*i, anchor="midleft",
                      font_name="Times New Roman")
             )
-    
+
     def move_boulders_down(self):
         """
         Loops through all of the boulders and moves them down.
@@ -163,7 +167,7 @@ class World:
             if boulder.boulder.y > get_height():
                 boulder.remove(self)
                 self.update_score(FAILED_BOULDER_PENALTY)
-
+    
 
 def void_setup() -> World:
     """
@@ -179,6 +183,7 @@ def void_setup() -> World:
             functions called by this one.
     """
     world = World()
+    world._ = Boulder(world)  # So it's actually displayed, the GC is too good.
     return world
 
 
@@ -191,6 +196,13 @@ def void_draw(world: World):
         world (World): The world for the game.  Will be used by some of the
             functions called by this one.
     """
+    boulder_prob = 1 + 1 / (1 + 2**( (50-world.score) / 16) )
+    boulder_prob *= BOULDER_BASE_PROB/2
+    if len(world.boulders) == 0:
+        boulder_prob *= 10
+    if rand() < boulder_prob and len(world.boulders) < MAX_BOULDERS:
+        print(boulder_prob)
+        Boulder(world)
     world.move_boulders_down()
     world.remove_fallen_boulders()
     world.display_score()
@@ -210,12 +222,9 @@ def void_keyPressed(world: World, key: str):
         key (str): The key that was pressed.
     """
     keys = MatchIter(SCALE_TYPE_INFO)
-    
-    print()
-    a = str(key)
-    match MatchStr(a):
-        case 'space':
-            Boulder(world)
+    match MatchStr(str(key)):
+        # case 'space':
+        #     Boulder(world)
         case 'left':
             world.select_previous()
         case 'right':
