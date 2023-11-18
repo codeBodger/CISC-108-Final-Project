@@ -171,6 +171,10 @@ class World:
                 self.update_score(FAILED_BOULDER_PENALTY)
     
     def pause(self):
+        """
+        Pauses the game; i.e. hides the scales, stops the boulders, and prevents
+            directly game-related input.
+        """
         for boulder in self.boulders.values():
             set_visible(boulder.scale.display, self.paused)
         self.paused = not self.paused
