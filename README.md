@@ -3,17 +3,17 @@
 
 ### Pitch
 Boulders will fall from the top of the screen.  These boulders will have sheet
-music of scales on them.  The user will have to use the number keys to choose
-what type of scale it is (Major/minor).  There will be a settings menu where
-the user can choose which scales (Major, Natural minor, Harmonic minor, Melodic
-minor, Mixolydian, Whole Tone, etc.), key signatures (Number of sharps/flats),
-clefs (Treble, Bass, Alto, Tenor, etc.), and amount of ledger lines they want.
-If the boulders land before the user has figured out what type of scale it is,
-they loose 10 points.  One point is awarded for each scale correctly identified
-on the first try.  Subsequent tries reduce the points awarded by 50%.  The
-arrow keys are used to select different falling boulders, so that if/when there
-are multiple falling at the same time, the user can tell the game which one
-they are guessing.  
+music of scales on them.  The user will have to use the keyboard to choose what
+type of scale it is (Major/minor).  There will be a settings menu where the user
+can choose which scales (Major, Natural minor, Harmonic minor, Melodic minor,
+Mixolydian, Whole Tone, etc.), key signatures (Number of sharps/flats), clefs
+(Treble, Bass, Alto, Tenor, etc.), and amount of ledger lines they want. If the
+boulders land before the user has figured out what type of scale it is, they
+loose 10 points.  One point is awarded for each scale correctly identified on
+the first try.  Subsequent tries reduce the points awarded by 50%.  The arrow
+keys are used to select different falling boulders, so that if/when there are
+multiple falling at the same time, the user can tell the game which one they are
+guessing.  
 
 ### Milestones
 #### Milestone 1: *[Video Link](https://youtu.be/jAdGS6ejogo)*
@@ -42,8 +42,8 @@ they are guessing.
 - [ ] Increase the speed that the boulders fall as the player gets more correct
 - [x] If the player presses `escape`, end the game
 - [x] Display the score to the user near the right of the screen
-- [ ] Display a list with the numbers that correspond to each scale type below
-      the score
+- [ ] Display a list with the keys that correspond to each scale type below the
+      score
 - [ ] If the player presses `space`, pause the game and blur the boulders
 
 #### Milestone 3
