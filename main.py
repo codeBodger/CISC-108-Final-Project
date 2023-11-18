@@ -11,7 +11,7 @@ MIN_DESIGNER_VERSION = "0.6.3"
 GUTTER = 200  # How far away from the right to put the score and other info
 FAILED_BOULDER_PENALTY = -10
 
-BOULDER_BASE_PROB = 2**-10
+BOULDER_BASE_PROB = 2**-9
 MAX_BOULDERS = 4
 
 # A dictionary to store some info about they types of scale, indexed with the
@@ -34,6 +34,7 @@ SCALE_TYPE_INFO = {
         "A4", "E4", "B4", "F#4", "C#4", "G#4", "D#4", "A#4"
     ])
 }
+SCALE_KEYS = MatchIter(SCALE_TYPE_INFO)
 
 
 class World:
@@ -42,6 +43,7 @@ class World:
     text_score: DesignerObject
     scale_keys_text: [DesignerObject]
     selected: int = 0  # The key of the selected boulder, its x-coordinate
+    paused: bool = False
     
     def __init__(self):
         """
@@ -168,6 +170,11 @@ class World:
                 boulder.remove(self)
                 self.update_score(FAILED_BOULDER_PENALTY)
     
+    def pause(self):
+        for boulder in self.boulders.values():
+            set_visible(boulder.scale.display, self.paused)
+        self.paused = not self.paused
+    
 
 def void_setup() -> World:
     """
@@ -196,6 +203,8 @@ def void_draw(world: World):
         world (World): The world for the game.  Will be used by some of the
             functions called by this one.
     """
+    if world.paused:
+        return
     boulder_prob = 1 + 1 / (1 + 2**( (50-world.score) / 16) )
     boulder_prob *= BOULDER_BASE_PROB/2
     if len(world.boulders) == 0:
@@ -221,15 +230,12 @@ def void_keyPressed(world: World, key: str):
             functions called by this one.
         key (str): The key that was pressed.
     """
-    keys = MatchIter(SCALE_TYPE_INFO)
     match MatchStr(str(key)):
-        # case 'space':
-        #     Boulder(world)
         case 'left':
             world.select_previous()
         case 'right':
             world.select_next()
-        case keys.value:
+        case SCALE_KEYS.value:
             if world.selected == 0:
                 return
             selected_boulder = world.boulders[world.selected]
@@ -243,6 +249,8 @@ def void_keyPressed(world: World, key: str):
                 selected_boulder.value *= 0.50
         case 'escape':
             exit(world.score)
+        case 'space':
+            world.pause()
         case _:
             print(key)
 
