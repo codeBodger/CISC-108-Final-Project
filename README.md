@@ -42,7 +42,7 @@ guessing.
 - [ ] Increase the speed that the boulders fall as the player gets more correct
 - [x] If the player presses `escape`, end the game
 - [x] Display the score to the user near the right of the screen
-- [ ] Display a list with the keys that correspond to each scale type below the
+- [x] Display a list with the keys that correspond to each scale type below the
       score
 - [ ] If the player presses `space`, pause the game and blur the boulders
 

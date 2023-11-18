@@ -36,6 +36,7 @@ class World:
     boulders: dict[int, Boulder] = {}
     score: float = 0.
     text_score: DesignerObject
+    scale_keys_text: [DesignerObject]
     selected: int = 0  # The key of the selected boulder, its x-coordinate
     
     def __init__(self):
@@ -43,9 +44,20 @@ class World:
         Constructor for World.  Initialises the world with no boulders and a
             score of 0.
         """
-        self.text_score = text('black', f"{self.score:.4}",
-                               30, get_width(), 20,
+        self.text_score = text('black', f"{self.score:.4}", 30,
+                               get_width(), 20,
                                font_name="Game Font", font_path="Game Font.ttf")
+        scale_keys_strs = [
+            f"{key}: {scale_type.name}"
+            for key, scale_type in SCALE_TYPE_INFO.items()
+        ]
+        self.scale_keys_text = []
+        for i, scale_keys_str in enumerate(scale_keys_strs):
+            self.scale_keys_text.append(
+                text('black', scale_keys_str, 20,
+                     get_width() - GUTTER, 80 + 40*i, anchor="midleft",
+                     font_name="Times New Roman")
+            )
     
     def move_boulders_down(self):
         """
