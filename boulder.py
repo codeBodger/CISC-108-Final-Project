@@ -6,7 +6,7 @@ from typing import TYPE_CHECKING
 from designer import *
 from random import randint, choice
 from scale import Scale
-from useful_funcs import boulder_speed
+from useful import boulder_speed
 
 if TYPE_CHECKING:
     from main import World

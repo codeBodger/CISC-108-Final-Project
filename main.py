@@ -1,7 +1,7 @@
 from designer import *
 from designer import __version__ as DESIGNER_VERSION
 from boulder import Boulder
-from useful_funcs import pm_bool, int_from_pattern, ensure_version, MatchStr, MatchIter
+from useful import pm_bool, int_from_pattern, ensure_version, MatchStr, MatchIter
 from scale import ScaleInfo
 
 

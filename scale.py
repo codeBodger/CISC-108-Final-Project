@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING
 
 # Normal imports
 from designer import *
-from useful_funcs import int_from_pattern, ensure_octave, get_next_letter, \
+from useful import int_from_pattern, ensure_octave, get_next_letter, \
     pm_bool, cmp
 from dataclasses import dataclass
 
