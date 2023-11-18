@@ -100,9 +100,3 @@ class Boulder:
         """
         self.boulder.y += BOULDER_SPEED
         self.scale.move_down(BOULDER_SPEED)
-
-
-# Allows the program to be run starting in this file, in addition to main.py
-if __name__ == "__main__":
-    from main import main
-    main()

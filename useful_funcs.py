@@ -76,11 +76,3 @@ def ensure_version(actual: str, required: str) -> bool:
             >=
             tuple(map(int, (required.split("."))))
     )
-
-
-# Allows the program to be run starting in this file, in addition to main.py
-if __name__ == "__main__":
-    # from main import main
-    # main()
-    print(get_next_letter('G'))
-    
