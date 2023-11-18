@@ -212,7 +212,7 @@ def void_draw(world: World):
     boulder_prob = 1 + 1 / (1 + 2**( (50-world.score) / 16) )
     boulder_prob *= BOULDER_BASE_PROB/2
     if len(world.boulders) == 0:
-        boulder_prob *= 10
+        boulder_prob = BOULDER_BASE_PROB
     if rand() < boulder_prob and len(world.boulders) < MAX_BOULDERS:
         print(boulder_prob)
         Boulder(world)
@@ -235,11 +235,12 @@ def void_keyPressed(world: World, key: str):
         key (str): The key that was pressed.
     """
     match MatchStr(str(key)):
-        case 'left':
+        # if not world.paused:
+        case 'left' if not world.paused:
             world.select_previous()
-        case 'right':
+        case 'right' if not world.paused:
             world.select_next()
-        case SCALE_KEYS.value:
+        case SCALE_KEYS.value if not world.paused:
             if world.selected == 0:
                 return
             selected_boulder = world.boulders[world.selected]
@@ -251,6 +252,7 @@ def void_keyPressed(world: World, key: str):
                 selected_boulder.remove(world)
             else:
                 selected_boulder.value *= 0.50
+        # Either way
         case 'escape':
             exit(world.score)
         case 'space':

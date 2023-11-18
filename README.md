@@ -46,7 +46,7 @@ guessing.
       score
 - [x] Automatically generate the boulders, rather than requiring the player to
       press `space` to generate them
-- [ ] If the player presses `space`, pause the game and hide the scales
+- [x] If the player presses `space`, pause the game and hide the scales
 
 #### Milestone 3
 - [ ] Create a settings menu
