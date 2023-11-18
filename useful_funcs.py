@@ -70,6 +70,14 @@ def cmp(a, b) -> int:
     return (a > b) - (a < b)
 
 
+def ensure_version(actual: str, required: str) -> bool:
+    return (
+            tuple(map(int, (actual.split("."))))
+            >=
+            tuple(map(int, (required.split("."))))
+    )
+
+
 # Allows the program to be run starting in this file, in addition to main.py
 if __name__ == "__main__":
     # from main import main
