@@ -48,7 +48,7 @@ guessing.
       press `space` to generate them
   - [ ] Fiddle with probabilities.  Starts out OK, needs to go up more
 - [x] If the player presses `space`, pause the game and hide the scales
-  - [ ] Create image for blurry text
+  - [x] Create image for blurry text
 
 #### Milestone 3
 - [ ] Create a settings menu

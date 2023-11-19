@@ -177,6 +177,7 @@ class World:
         """
         for boulder in self.boulders.values():
             set_visible(boulder.scale.display, self.paused)
+            set_visible(boulder.scale.blur, not self.paused)
         self.paused = not self.paused
     
 

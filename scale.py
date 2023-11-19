@@ -283,6 +283,7 @@ class Scale:
     key_signature: KeySignature
     background: DesignerObject
     display: DesignerObject
+    blur: DesignerObject
     
     def __init__(self, pattern: str, starts_on: str, clef: str = "treble"):
         """
@@ -308,6 +309,7 @@ class Scale:
             'black', "", SCALE_TEXT_SIZE,
             font_name="Game Font", font_path="Game Font.ttf"
         )
+        self.blur = image("blurred_scale.png")
     
     def __str__(self) -> str:
         """
@@ -349,14 +351,18 @@ class Scale:
             x (int): The x-coordinate of the boulder, and by extension the scale
             y (int): The y-coordinate of the boulder, and by extension the scale
         """
+        self.background.x = x
+        self.background.y = y - 10
+        self.background.width = BACKGROUND_WIDTH
+        self.background.height = BACKGROUND_HEIGHT
+        
         self.display.x = x
         self.display.y = y
         self.display.text = str(self)
         
-        self.background.x = x
-        self.background.y = y - 10
-        self.background.width = 176
-        self.background.height = 60
+        self.blur.x = self.background.x
+        self.blur.y = self.background.y
+        hide(self.blur)
 
     def move_down(self, speed: float):
         """
@@ -366,8 +372,9 @@ class Scale:
             speed (int): The speed to move the text down by
                 It should always be BOULDER_SPEED
         """
-        self.display.y += speed
         self.background.y += speed
+        self.display.y += speed
+        self.blur.y += speed
     
     def remove(self):
         destroy(self.display)
