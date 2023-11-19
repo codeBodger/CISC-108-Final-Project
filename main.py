@@ -9,9 +9,9 @@ from scale import ScaleInfo
 MIN_DESIGNER_VERSION = "0.6.3"
 
 GUTTER = 200  # How far away from the right to put the score and other info
-FAILED_BOULDER_PENALTY = -10
+FAILED_BOULDER_PENALTY = -5
 
-BOULDER_BASE_PROB = 2**-9
+BOULDER_MAX_PROB = 2 ** -6
 MAX_BOULDERS = 4
 
 # A dictionary to store some info about they types of scale, indexed with the
@@ -210,10 +210,10 @@ def void_draw(world: World):
     """
     if world.paused:
         return
-    boulder_prob = 1 + 1 / (1 + 2**( (50-world.score) / 16) )
-    boulder_prob *= BOULDER_BASE_PROB/2
+    boulder_prob = .1 + .9 / (1 + 2.7**( 2 - world.score/25) )
+    boulder_prob *= BOULDER_MAX_PROB
     if len(world.boulders) == 0:
-        boulder_prob = BOULDER_BASE_PROB
+        boulder_prob = BOULDER_MAX_PROB
     if rand() < boulder_prob and len(world.boulders) < MAX_BOULDERS:
         print(boulder_prob)
         Boulder(world)
