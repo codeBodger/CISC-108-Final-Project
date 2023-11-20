@@ -15,7 +15,7 @@ keys are used to select different falling boulders, so that if/when there are
 multiple falling at the same time, the user can tell the game which one they are
 guessing.  
 
-### Milestones
+### Milestones: *[Playlist Link](https://www.youtube.com/playlist?list=PLXKECBnXgn1Ua_jhHZfyMTJYzWtKa3UQd)*
 #### Milestone 1: *[Video Link](https://youtu.be/jAdGS6ejogo)*
 - [x] Create a boulder class
   - [x] Create the boulders randomly at the top of the screen
@@ -33,7 +33,7 @@ guessing.
 - [x] For this milestone, we'll just display a list of note names without
       octave numbers.  
 
-#### Milestone 2
+#### Milestone 2: *[Video Link](https://youtu.be/xbCj2junQVo)*
 - [x] Figure out some way to display the sheet music for the scales, given a
       type, starting note, and clef
   - [x] Ensure that the scales are displayed on top of the boulders
