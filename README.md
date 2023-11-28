@@ -51,8 +51,10 @@ guessing.
   - [x] Create image for blurry text
 
 #### Milestone 3
+- [ ] Create a main menu
+  - [ ] Make the main world accessible from it
 - [ ] Create a settings menu
-  - [ ] Allow the user to enter the settings menu
+  - [ ] Allow the user to enter the settings menu from the main menu
   - [ ] Allow the user to select different types of scale
   - [ ] Allow the user to select different clefs
   - [ ] Allow the user to select different key signatures
