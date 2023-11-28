@@ -1,12 +1,9 @@
 from designer import *
-from designer import __version__ as DESIGNER_VERSION
 from random import random as rand
 from boulder import Boulder
-from useful import pm_bool, int_from_pattern, ensure_version, MatchStr, MatchIter
+from useful import pm_bool, int_from_pattern, MatchStr, MatchIter
 from scale import ScaleInfo
 
-
-MIN_DESIGNER_VERSION = "0.6.3"
 
 GUTTER = 200  # How far away from the right to put the score and other info
 FAILED_BOULDER_PENALTY = -5
@@ -263,16 +260,10 @@ def void_keyPressed(world: World, key: str):
 
 
 def main():
-    if not ensure_version(DESIGNER_VERSION, MIN_DESIGNER_VERSION):
-        raise Exception(
-            f"DesignerVersionError: {DESIGNER_VERSION}, "
-            f"Version {MIN_DESIGNER_VERSION} or higher is required."
-        )
-    
-    when('starting', void_setup)
-    when('updating', void_draw)
-    when('typing', void_keyPressed)
-    start()
+    when('starting: world', void_setup)
+    when('updating: world', void_draw)
+    when('typing: world', void_keyPressed)
+    # start()
 
 
 if __name__ == "__main__":
