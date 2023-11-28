@@ -252,7 +252,8 @@ def void_keyPressed(world: World, key: str):
                 selected_boulder.value *= 0.50
         # Either way
         case 'escape':
-            exit(world.score)
+            print(world.score)
+            pop_scene()
         case 'space':
             world.pause()
         case _:
