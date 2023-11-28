@@ -1,24 +1,32 @@
 from designer import *
 from designer import __version__ as DESIGNER_VERSION
-from useful import ensure_version
+from useful import ensure_version, Menu, MenuEntry
 
 
 MIN_DESIGNER_VERSION = "0.6.3"
 
 
 class MainMenu:
-    menu_text: [DesignerObject] = []
+    menu_structure: Menu = Menu(
+        "Press a number key to continue",
+        [
+            MenuEntry("Play", push_scene, "world"),
+            MenuEntry("Settings", push_scene, "settings_menu")
+        ]
+    )
+    menu_label: DesignerObject
+    menu_text: [DesignerObject]
     
     def __init__(self):
+        self.menu_label = text(
+            "black", self.menu_structure.header, 40,
+            get_width()/2, 40
+        )
+        
         self.menu_text = []
-        menu_texts = [
-            "Press a number key to continue",
-            "1. Play",
-            "2. Settings"
-        ]
-        for i, menu_text in enumerate(menu_texts):
+        for i, menu_entry in enumerate(self.menu_structure.entries):
             self.menu_text.append(text(
-                "black", menu_text, 30,
+                "black", f"{i+1}. {menu_entry.label}", 30,
                 get_width()/2, 100 + 50*i
             ))
 
@@ -28,7 +36,17 @@ def void_setup():
 
 
 def void_keyPressed(menu: MainMenu, key: str):
-    push_scene('world')
+    try:
+        choice = (int(
+            str(key)
+            .replace("[", "")
+            .replace("]", ""))
+                  - 1)
+        if choice < 0:
+            raise IndexError("Negatives are out of bounds here.")
+        menu.menu_structure.entries[choice]()
+    except (ValueError, IndexError):
+        print(key)
 
 
 def main():

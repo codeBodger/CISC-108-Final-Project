@@ -260,11 +260,9 @@ def void_keyPressed(world: World, key: str):
 
 
 def main():
+    """
+    Calls all of the required `when`s for the main game.
+    """
     when('starting: world', void_setup)
     when('updating: world', void_draw)
     when('typing: world', void_keyPressed)
-    # start()
-
-
-if __name__ == "__main__":
-    main()
