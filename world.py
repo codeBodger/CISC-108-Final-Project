@@ -259,7 +259,7 @@ def void_keyPressed(world: World, key: str):
             print(key)
 
 
-def main():
+def whens():
     """
     Calls all of the required `when`s for the main game.
     """

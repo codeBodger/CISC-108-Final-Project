@@ -59,7 +59,7 @@ def main():
     when('starting: main_menu', void_setup)
     when('typing: main_menu', void_keyPressed)
     import world
-    world.main()
+    world.whens()
     start()
 
 
