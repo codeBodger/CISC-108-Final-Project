@@ -14,7 +14,7 @@ FAILED_BOULDER_PENALTY = -5
 BOULDER_MAX_PROB = 2 ** -6
 MAX_BOULDERS = 4
 
-# A dictionary to store some info about they types of scale, indexed with the
+# A dictionary to store some info about the types of scale, indexed with the
 # key that must be pressed to choose the type of scale
 SCALE_TYPE_INFO = {
     "q": ScaleInfo("Major",          "WWHWWWH", [
