@@ -7,8 +7,20 @@ MIN_DESIGNER_VERSION = "0.6.3"
 
 
 class MainMenu:
+    menu_text: [DesignerObject] = []
+    
     def __init__(self):
-        pass
+        self.menu_text = []
+        menu_texts = [
+            "Press a number key to continue",
+            "1. Play",
+            "2. Settings"
+        ]
+        for i, menu_text in enumerate(menu_texts):
+            self.menu_text.append(text(
+                "black", menu_text, 30,
+                get_width()/2, 100 + 50*i
+            ))
 
 
 def void_setup():
