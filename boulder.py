@@ -9,7 +9,7 @@ from scale import Scale
 from useful import boulder_speed
 
 if TYPE_CHECKING:
-    from main import World
+    from world import World
 
 
 BOULDER_SCALE = 5
@@ -37,7 +37,7 @@ class Boulder:
                 to ensure that boulders don't overlap, and for the boulders to
                 be added to.
         """
-        from main import GUTTER, SCALE_TYPE_INFO
+        from world import GUTTER, SCALE_TYPE_INFO
         x = randint(BOULDER_WIDTH//2, get_width() - BOULDER_WIDTH//2 - GUTTER)
         y = 0
         
