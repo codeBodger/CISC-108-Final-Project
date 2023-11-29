@@ -1,6 +1,5 @@
 # Imports for type checking
 from __future__ import annotations
-from typing import TYPE_CHECKING
 
 # Normal imports
 from designer import *
