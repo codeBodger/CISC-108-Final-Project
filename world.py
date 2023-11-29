@@ -3,7 +3,7 @@ from random import random as rand
 from dataclasses import dataclass, field
 from boulder import Boulder
 from useful import pm_bool, int_from_pattern, MatchStr, MatchIter
-from scale import ScaleInfo
+from scale import SCALE_TYPE_INFO
 
 
 GUTTER = 200  # How far away from the right to put the score and other info
@@ -12,54 +12,6 @@ FAILED_BOULDER_PENALTY = -5
 BOULDER_MAX_PROB = 2 ** -6
 MAX_BOULDERS = 4
 
-# A dictionary to store some info about the types of scale, indexed with the
-# key that must be pressed to choose the type of scale
-SCALE_TYPE_INFO = {
-    "q": ScaleInfo("Major",          "WWHWWWH", [
-        "Cb4", "Gb4", "Db4", "Ab4", "Eb4", "Bb4", "F4",
-        "C4", "G4", "D4", "A4", "E4", "B4", "F#4", "C#4"
-    ]),
-    "w": ScaleInfo("Natural Minor",  "WHWWHWW", [
-        "Ab4", "Eb4", "Bb4", "F4", "C4", "G4", "D4",
-        "A4", "E4", "B4", "F#4", "C#4", "G#4", "D#4", "A#4"
-    ]),
-    "e": ScaleInfo("Harmonic Minor", "WHWWH3H", [
-        "Ab4", "Eb4", "Bb4", "F4", "C4", "G4", "D4",
-        "A4", "E4", "B4", "F#4", "C#4", "G#4", "D#4", "A#4"
-    ]),
-    "r": ScaleInfo("Melodic Minor",  "WHWWWWH", [
-        "Ab4", "Eb4", "Bb4", "F4", "C4", "G4", "D4",
-        "A4", "E4", "B4", "F#4", "C#4", "G#4", "D#4", "A#4"
-    ]),
-    "1": ScaleInfo("Ionian",         "WWHWWWH", [
-        "Cb4", "Gb4", "Db4", "Ab4", "Eb4", "Bb4", "F4",
-        "C4", "G4", "D4", "A4", "E4", "B4", "F#4", "C#4"
-    ]),
-    "2": ScaleInfo("Dorian",         "WHWWWHW", [
-        "Db4", "Ab4", "Eb4", "Bb4", "F4", "C4", "G4",
-        "D4", "A4", "E4", "B4", "F#4", "C#4", "G#4", "D#4"
-    ]),
-    "3": ScaleInfo("Phrygian",       "HWWWHWW", [
-        "Eb4", "Bb4", "F4", "C4", "G4", "D4", "A4",
-        "E4", "B4", "F#4", "C#4", "G#4", "D#4", "A#4", "E#4"
-    ]),
-    "4": ScaleInfo("Lydian",         "WWWHWWH", [
-        "Fb4", "Cb4", "Gb4", "Db4", "Ab4", "Eb4", "Bb4",
-        "F4", "C4", "G4", "D4", "A4", "E4", "B4", "F#4"
-    ]),
-    "5": ScaleInfo("Mixolydian",     "WWHWWHW", [
-        "Gb4", "Db4", "Ab4", "Eb4", "Bb4", "F4", "C4",
-        "G4", "D4", "A4", "E4", "B4", "F#4", "C#4", "G#4"
-    ]),
-    "6": ScaleInfo("Aeolian",        "WHWWHWW", [
-        "Ab4", "Eb4", "Bb4", "F4", "C4", "G4", "D4",
-        "A4", "E4", "B4", "F#4", "C#4", "G#4", "D#4", "A#4"
-    ]),
-    "7": ScaleInfo("Lochrian",       "HWWHWWW", [
-        "Bb4", "F4", "C4", "G4", "D4", "A4", "E4",
-        "B4", "F#4", "C#4", "G#4", "D#4", "A#4", "E#4", "B#4"
-    ])
-}
 SCALE_KEYS = MatchIter(SCALE_TYPE_INFO)
 
 
