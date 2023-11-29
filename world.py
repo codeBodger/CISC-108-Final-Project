@@ -54,7 +54,7 @@ class World:
         """
         self.text_score = text('black', f"{self.score:.4}", 30,
                                get_width(), 20,
-                               font_name="Game Font", font_path="Game Font.ttf")
+                               font_name="Game Font", font_path="resources/Game Font.ttf")
         scale_keys_strs = [
             f"{key}: {scale_type.name}"
             for key, scale_type in SCALE_TYPE_INFO.items()

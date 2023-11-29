@@ -307,9 +307,9 @@ class Scale:
                                     BACKGROUND_WIDTH,BACKGROUND_HEIGHT)
         self.display = text(
             'black', "", SCALE_TEXT_SIZE,
-            font_name="Game Font", font_path="Game Font.ttf"
+            font_name="Game Font", font_path="resources/Game Font.ttf"
         )
-        self.blur = image("blurred_scale.png")
+        self.blur = image("resources/blurred_scale.png")
     
     def __str__(self) -> str:
         """
