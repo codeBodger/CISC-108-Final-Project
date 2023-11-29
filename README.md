@@ -41,7 +41,7 @@ guessing.
   - [x] Ensure that scales fit within the specs of the default settings
 - [x] Increase the speed that the boulders fall as the player gets more correct
 - [x] If the player presses `escape`, return to the main menu
-  - [ ] Fix entering game again
+  - [x] Fix entering game again
 - [x] Display the score to the user near the right of the screen
 - [x] Display a list with the keys that correspond to each scale type below the
       score

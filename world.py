@@ -1,5 +1,6 @@
 from designer import *
 from random import random as rand
+from dataclasses import dataclass, field
 from boulder import Boulder
 from useful import pm_bool, int_from_pattern, MatchStr, MatchIter
 from scale import ScaleInfo
@@ -34,18 +35,22 @@ SCALE_TYPE_INFO = {
 SCALE_KEYS = MatchIter(SCALE_TYPE_INFO)
 
 
+@dataclass
 class World:
-    boulders: dict[int, Boulder] = {}
+    text_score: DesignerObject = None
+    scale_keys_text: [DesignerObject] = None
+    boulders: dict[int, Boulder] = field(default_factory=dict)
     score: float = 0.
-    text_score: DesignerObject
-    scale_keys_text: [DesignerObject]
     selected: int = 0  # The key of the selected boulder, its x-coordinate
     paused: bool = False
     
-    def __init__(self):
+    def __post_init__(self):
         """
-        Constructor for World.  Initialises the world with no boulders and a
-            score of 0.
+        Real constructor for World (__init__() really just calls this; I wanted
+            to have the list of attrs at the top, but pointers made this
+            impossible, so I had to use a dataclass, even when I wanted my own
+            __init__().  This was the best that I could come up with).
+            Initialises the world with no boulders and a score of 0.
         """
         self.text_score = text('black', f"{self.score:.4}", 30,
                                get_width(), 20,
