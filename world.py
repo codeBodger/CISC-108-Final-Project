@@ -30,6 +30,34 @@ SCALE_TYPE_INFO = {
     "r": ScaleInfo("Melodic Minor",  "WHWWWWH", [
         "Ab4", "Eb4", "Bb4", "F4", "C4", "G4", "D4",
         "A4", "E4", "B4", "F#4", "C#4", "G#4", "D#4", "A#4"
+    ]),
+    "1": ScaleInfo("Ionian",         "WWHWWWH", [
+        "Cb4", "Gb4", "Db4", "Ab4", "Eb4", "Bb4", "F4",
+        "C4", "G4", "D4", "A4", "E4", "B4", "F#4", "C#4"
+    ]),
+    "2": ScaleInfo("Dorian",         "WHWWWHW", [
+        "Db4", "Ab4", "Eb4", "Bb4", "F4", "C4", "G4",
+        "D4", "A4", "E4", "B4", "F#4", "C#4", "G#4", "D#4"
+    ]),
+    "3": ScaleInfo("Phrygian",       "HWWWHWW", [
+        "Eb4", "Bb4", "F4", "C4", "G4", "D4", "A4",
+        "E4", "B4", "F#4", "C#4", "G#4", "D#4", "A#4", "E#4"
+    ]),
+    "4": ScaleInfo("Lydian",         "WWWHWWH", [
+        "Fb4", "Cb4", "Gb4", "Db4", "Ab4", "Eb4", "Bb4",
+        "F4", "C4", "G4", "D4", "A4", "E4", "B4", "F#4"
+    ]),
+    "5": ScaleInfo("Mixolydian",     "WWHWWHW", [
+        "Gb4", "Db4", "Ab4", "Eb4", "Bb4", "F4", "C4",
+        "G4", "D4", "A4", "E4", "B4", "F#4", "C#4", "G#4"
+    ]),
+    "6": ScaleInfo("Aeolian",        "WHWWHWW", [
+        "Ab4", "Eb4", "Bb4", "F4", "C4", "G4", "D4",
+        "A4", "E4", "B4", "F#4", "C#4", "G#4", "D#4", "A#4"
+    ]),
+    "7": ScaleInfo("Lochrian",       "HWWHWWW", [
+        "Bb4", "F4", "C4", "G4", "D4", "A4", "E4",
+        "B4", "F#4", "C#4", "G#4", "D#4", "A#4", "E#4", "B#4"
     ])
 }
 SCALE_KEYS = MatchIter(SCALE_TYPE_INFO)
