@@ -59,7 +59,7 @@ guessing.
   - [ ] Allow the user to select different types of scale
   - [ ] Allow the user to select different clefs
   - [ ] Allow the user to select different key signatures
-  - [ ] Allow the user to select different amounts of ledger lines
+  - [x] Allow the user to select different amounts of ledger lines
   - [x] Allow the user to return from the settings menu by pressing escape
 - [ ] Ensure that the scales fit within the specs of the user-defined settings
 - [ ] There's no end condition in the game, but we'll allow the user to set one

@@ -1,7 +1,9 @@
 import json
+from typing import Any
 from designer import *
 from dataclasses import dataclass, asdict, field
-from useful import Menu, MenuEntry
+from useful import Menu, MenuEntry, FONT_PATH, pm_bool
+from scale import TOTAL_NOTES, LEDGER_LINES, NOTES_START
 
 
 DEFAULT_CONFIG = {
@@ -12,16 +14,6 @@ DEFAULT_CONFIG = {
     "max_high_ledger_positions": 4,
     "max_low_ledger_positions": 4,
 }
-
-
-HEADER = "Settings: Press a number key to continue"
-ENTRIES = [
-    MenuEntry("Enable/Disable Standard Scales", print, "Standard Scales"),
-    MenuEntry("Enable/Disable Church Modes", print, "Church Modes"),
-    MenuEntry("Enable/Disable Clefs", print, "Clefs"),
-    MenuEntry("Increase/Decrease Key Signature Range", print, "Keys"),
-    MenuEntry("Increase/Decrease Ledger Lines", print, "Ledger Lines"),
-]
 
 
 @dataclass(kw_only=True)
@@ -57,6 +49,50 @@ class Settings(object):
 @dataclass
 class SettingsScreen(Menu):
     settings: Settings = field(default_factory=Settings.load)
+    active_sub_menu: str = None
+    active_sub_menu_left: bool = True
+    sub_menu: [DesignerObject] = None
+
+
+def ledger_lines(menu: SettingsScreen, update: bool = False):
+    low_ledger_line  = chr(NOTES_START + LEDGER_LINES + 1
+                           - menu.settings.max_low_ledger_positions)
+    high_ledger_line = chr(NOTES_START + TOTAL_NOTES - LEDGER_LINES
+                           + menu.settings.max_high_ledger_positions)
+    if update:
+        menu.sub_menu[0].text = low_ledger_line
+        menu.sub_menu[0].alpha = 1. if menu.active_sub_menu_left else .3
+        menu.sub_menu[1].text = high_ledger_line
+        menu.sub_menu[1].alpha = .3 if menu.active_sub_menu_left else 1.
+    else:
+        menu.active_sub_menu = "ledger lines"
+        menu.active_sub_menu_left = True
+        menu.sub_menu = [
+            text('black', low_ledger_line,  60, anchor="midright",
+                 font_name="Game Font", font_path=FONT_PATH),
+            text('black', high_ledger_line, 60, anchor="midleft",
+                 font_name="Game Font", font_path=FONT_PATH, alpha=.3)
+        ]
+        menu.sub_menu[0].x -= 30
+        menu.sub_menu[1].x += 30
+
+
+HEADER = "Settings: Press a number key to continue"
+ENTRIES = [
+    MenuEntry("Enable/Disable Standard Scales", print, "Standard Scales"),
+    MenuEntry("Enable/Disable Church Modes", print, "Church Modes"),
+    MenuEntry("Enable/Disable Clefs", print, "Clefs"),
+    MenuEntry("Increase/Decrease Key Signature Range", print, "Keys"),
+    MenuEntry("Increase/Decrease Ledger Lines", ledger_lines)
+]
+
+
+def exit_sub_menu(menu: SettingsScreen):
+    menu.active_sub_menu = None
+    menu.active_sub_menu_left = True
+    for designer_object in menu.sub_menu:
+        destroy(designer_object)
+    menu.sub_menu = None
 
 
 def void_setup():
@@ -65,13 +101,30 @@ def void_setup():
 
 
 def void_keyPressed(menu: SettingsScreen, key: str):
-    if not menu.select(key):
-        match key:
-            case "escape":
-                menu.settings.save()
-                pop_scene()
-            case _:
-                print(key)
+    match menu.active_sub_menu:
+        case "ledger lines":
+            change = 0
+            match key:
+                case 'left' | 'right':
+                    menu.active_sub_menu_left ^= True  # not
+                case 'up' | 'down':
+                    change = pm_bool(key == 'down')
+                case 'escape':
+                    exit_sub_menu(menu)
+                    return
+            if menu.active_sub_menu_left:
+                menu.settings.max_low_ledger_positions  += change
+            else:
+                menu.settings.max_high_ledger_positions -= change
+            ledger_lines(menu, update=True)
+        case _:
+            if not menu.select(key, menu):
+                match key:
+                    case "escape":
+                        menu.settings.save()
+                        pop_scene()
+                    case _:
+                        print(key)
 
 
 def whens():
