@@ -1,6 +1,7 @@
 from typing import Union, Any
 from collections.abc import Iterable, Callable
 from dataclasses import dataclass
+from designer import *
 
 
 def pm_bool(b: bool) -> int:
@@ -181,3 +182,32 @@ class MenuEntry:
 class Menu:
     header: str
     entries: [MenuEntry]
+    menu_label: DesignerObject = None
+    menu_text: [DesignerObject] = None
+    
+    def __post_init__(self):
+        self.menu_label = text(
+            "black", self.header, 40,
+            get_width() / 2, 40
+        )
+        
+        self.menu_text = []
+        for i, menu_entry in enumerate(self.entries):
+            self.menu_text.append(text(
+                "black", f"{i + 1}. {menu_entry.label}", 30,
+                get_width() / 2, 100 + 50 * i
+            ))
+
+    def select(self, key: str) -> bool:
+        try:
+            choice = (int(
+                str(key)
+                .replace("[", "")
+                .replace("]", ""))
+                      - 1)
+            if choice < 0:
+                raise IndexError("Negatives are out of bounds here.")
+            self.entries[choice]()
+            return True
+        except (ValueError, IndexError):
+            return False
