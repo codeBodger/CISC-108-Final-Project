@@ -184,18 +184,30 @@ class Menu:
     entries: [MenuEntry]
     menu_label: DesignerObject = None
     menu_text: [DesignerObject] = None
+    left: bool = False
+    size_percent: int = 100
+    margin_left: int = 0
+    margin_top: int = 0
     
     def __post_init__(self):
+        if self.left:
+            x = self.margin_left
+            anchor = 'midleft'
+        else:
+            x = get_width() / 2
+            anchor = 'center'
+        
         self.menu_label = text(
-            "black", self.header, 40,
-            get_width() / 2, 40
+            "black", self.header, self.resize(40),
+            x, self.resize(40), anchor
         )
         
         self.menu_text = []
         for i, menu_entry in enumerate(self.entries):
             self.menu_text.append(text(
-                "black", f"{i + 1}. {menu_entry.label}", 30,
-                get_width() / 2, 100 + 50 * i
+                "black", f"{i + 1}. {menu_entry.label}",
+                self.resize(30),
+                x, self.resize(100 + 50 * i), anchor
             ))
 
     def select(self, key: str) -> bool:
@@ -211,3 +223,6 @@ class Menu:
             return True
         except (ValueError, IndexError):
             return False
+    
+    def resize(self, value: int) -> int:
+        return value * self.size_percent // 100

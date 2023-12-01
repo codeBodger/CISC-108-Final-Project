@@ -16,7 +16,11 @@ DEFAULT_CONFIG = {
 
 HEADER = "Settings: Press a number key to continue"
 ENTRIES = [
-    MenuEntry("temp_label", print, "settings!!")
+    MenuEntry("Enable/Disable Standard Scales", print, "Standard Scales"),
+    MenuEntry("Enable/Disable Church Modes", print, "Church Modes"),
+    MenuEntry("Enable/Disable Clefs", print, "Clefs"),
+    MenuEntry("Increase/Decrease Key Signature Range", print, "Keys"),
+    MenuEntry("Increase/Decrease Ledger Lines", print, "Ledger Lines"),
 ]
 
 
@@ -56,7 +60,8 @@ class SettingsScreen(Menu):
 
 
 def void_setup():
-    return SettingsScreen(HEADER, ENTRIES)
+    return SettingsScreen(HEADER, ENTRIES,
+                          left=True, size_percent=70, margin_left=20)
 
 
 def void_keyPressed(menu: SettingsScreen, key: str):
