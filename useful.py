@@ -210,7 +210,7 @@ class Menu:
                 x, self.resize(100 + 50 * i), anchor
             ))
 
-    def select(self, key: str) -> bool:
+    def select(self, key: str, *args, **kwargs) -> bool:
         try:
             choice = (int(
                 str(key)
@@ -219,10 +219,13 @@ class Menu:
                       - 1)
             if choice < 0:
                 raise IndexError("Negatives are out of bounds here.")
-            self.entries[choice]()
+            self.entries[choice](*args, **kwargs)
             return True
         except (ValueError, IndexError):
             return False
     
     def resize(self, value: int) -> int:
         return value * self.size_percent // 100
+
+
+FONT_PATH = "resources/Game Font.ttf"

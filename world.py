@@ -2,7 +2,7 @@ from designer import *
 from random import random as rand
 from dataclasses import dataclass, field
 from boulder import Boulder
-from useful import pm_bool, int_from_pattern, MatchStr, MatchIter
+from useful import pm_bool, int_from_pattern, MatchStr, MatchIter, FONT_PATH
 from scale import SCALE_TYPE_INFO
 
 
@@ -34,7 +34,7 @@ class World:
         """
         self.text_score = text('black', f"{self.score:.4}", 30,
                                get_width(), 20,
-                               font_name="Game Font", font_path="resources/Game Font.ttf")
+                               font_name="Game Font", font_path=FONT_PATH)
         scale_keys_strs = [
             f"{key}: {scale_type.name}"
             for key, scale_type in SCALE_TYPE_INFO.items()
