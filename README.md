@@ -54,13 +54,13 @@ guessing.
 #### Milestone 3
 - [x] Create a main menu
   - [x] Make the main world accessible from it
-- [ ] Create a settings menu
+- [x] Create a settings menu
   - [x] Allow the user to enter the settings menu from the main menu
   - [ ] Allow the user to select different types of scale
   - [ ] Allow the user to select different clefs
   - [ ] Allow the user to select different key signatures
   - [ ] Allow the user to select different amounts of ledger lines
-  - [ ] Allow the user to return from the settings menu
+  - [x] Allow the user to return from the settings menu by pressing escape
 - [ ] Ensure that the scales fit within the specs of the user-defined settings
 - [ ] There's no end condition in the game, but we'll allow the user to set one
       in the settings menu
