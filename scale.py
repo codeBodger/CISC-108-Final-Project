@@ -23,6 +23,7 @@ LETTERS_PER_OCTAVE = len(ORDER_OF_SHARPS)
 STAFF_LINES  = 5
 STAFF_SPACES = 4
 LEDGER_LINES = 4
+TOTAL_NOTES = STAFF_LINES + STAFF_SPACES + 2 * LEDGER_LINES
 
 NOTES_START = 0xE000
 FLATS_START = 0xE020
@@ -113,9 +114,7 @@ class Clef:
         """ Creates all_notes from lowest_note """
         letter_now = self.lowest_note.letter
         octave_now = self.lowest_note.octave
-        for i in range(STAFF_LINES + STAFF_SPACES
-                       + 2 * LEDGER_LINES
-                       - LETTERS_PER_OCTAVE):
+        for i in range(TOTAL_NOTES - LETTERS_PER_OCTAVE):
             temp_notes = [letter_now] * 3
             temp_notes[0] += "b"
             temp_notes[2] += "#"
