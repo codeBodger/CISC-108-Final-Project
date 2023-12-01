@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING
 
 # Normal imports
 from designer import *
-from random import randint, choice
+from random import randint
 from scale import Scale
 from useful import boulder_speed
 
@@ -37,7 +37,7 @@ class Boulder:
                 to ensure that boulders don't overlap, and for the boulders to
                 be added to.
         """
-        from world import GUTTER, SCALE_TYPE_INFO
+        from world import GUTTER
         x = randint(BOULDER_WIDTH//2, get_width() - BOULDER_WIDTH//2 - GUTTER)
         y = 0
         
@@ -54,8 +54,7 @@ class Boulder:
                 world.selected = self.boulder.x
                 self.boulder.alpha = 1
     
-        scale_type = choice(list(SCALE_TYPE_INFO.values()))
-        self.scale = Scale(scale_type.pattern, choice(scale_type.possible_starts))
+        self.scale = Scale()
         self.scale.make_text(self.boulder.x, self.boulder.y)
     
     def is_colliding_somewhere(self, world: World) -> bool:

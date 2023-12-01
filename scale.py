@@ -5,7 +5,8 @@ from __future__ import annotations
 from designer import *
 from useful import int_from_pattern, ensure_octave, get_next_letter, \
     pm_bool, cmp
-from dataclasses import dataclass
+from dataclasses import dataclass, field
+from random import choice
 
 
 # I might change these to better symbols at some point.
@@ -18,6 +19,10 @@ BACKGROUND_HEIGHT = 60
 
 ORDER_OF_SHARPS = 'FCGDAEB'
 LETTERS_PER_OCTAVE = len(ORDER_OF_SHARPS)
+
+STAFF_LINES  = 5
+STAFF_SPACES = 4
+LEDGER_LINES = 4
 
 NOTES_START = 0xE000
 FLATS_START = 0xE020
@@ -33,55 +38,64 @@ ACCIDENTALS_START = {
 class ScaleInfo:
     name: str  # The name of the type of scale
     pattern: str  # The pattern of whole and half (and augmented) steps
-    possible_starts: [str]  # The notes that this type of scale can start on
+    # The notes that this type of scale can start without octaves
+    possible_starts_octaveless: [str]
+    # All of the possible start positions
+    possible_starts: set[str] = field(default_factory=set)
+    
+    def __post_init__(self):
+        """ Creates possible_starts from possible_starts_octaveless """
+        for possible_start in self.possible_starts_octaveless:
+            for octave in range(9):
+                self.possible_starts.add(possible_start + str(octave))
 
 
 # A dictionary to store some info about the types of scale, indexed with the
 # key that must be pressed to choose the type of scale
 SCALE_TYPE_INFO = {
     "q": ScaleInfo("Major",          "WWHWWWH", [
-        "Cb4", "Gb4", "Db4", "Ab4", "Eb4", "Bb4", "F4",
-        "C4", "G4", "D4", "A4", "E4", "B4", "F#4", "C#4"
+        "Cb", "Gb", "Db", "Ab", "Eb", "Bb", "F",
+        "C", "G", "D", "A", "E", "B", "F#", "C#"
     ]),
     "w": ScaleInfo("Natural Minor",  "WHWWHWW", [
-        "Ab4", "Eb4", "Bb4", "F4", "C4", "G4", "D4",
-        "A4", "E4", "B4", "F#4", "C#4", "G#4", "D#4", "A#4"
+        "Ab", "Eb", "Bb", "F", "C", "G", "D",
+        "A", "E", "B", "F#", "C#", "G#", "D#", "A#"
     ]),
     "e": ScaleInfo("Harmonic Minor", "WHWWH3H", [
-        "Ab4", "Eb4", "Bb4", "F4", "C4", "G4", "D4",
-        "A4", "E4", "B4", "F#4", "C#4", "G#4", "D#4", "A#4"
+        "Ab", "Eb", "Bb", "F", "C", "G", "D",
+        "A", "E", "B", "F#", "C#", "G#", "D#", "A#"
     ]),
     "r": ScaleInfo("Melodic Minor",  "WHWWWWH", [
-        "Ab4", "Eb4", "Bb4", "F4", "C4", "G4", "D4",
-        "A4", "E4", "B4", "F#4", "C#4", "G#4", "D#4", "A#4"
+        "Ab", "Eb", "Bb", "F", "C", "G", "D",
+        "A", "E", "B", "F#", "C#", "G#", "D#", "A#"
     ]),
     "1": ScaleInfo("Ionian",         "WWHWWWH", [
-        "Cb4", "Gb4", "Db4", "Ab4", "Eb4", "Bb4", "F4",
-        "C4", "G4", "D4", "A4", "E4", "B4", "F#4", "C#4"
+        "Cb", "Gb", "Db", "Ab", "Eb", "Bb", "F",
+        "C", "G", "D", "A", "E", "B", "F#", "C#"
     ]),
     "2": ScaleInfo("Dorian",         "WHWWWHW", [
-        "Db4", "Ab4", "Eb4", "Bb4", "F4", "C4", "G4",
-        "D4", "A4", "E4", "B4", "F#4", "C#4", "G#4", "D#4"
+        "Db", "Ab", "Eb", "Bb", "F", "C", "G",
+        "D", "A", "E", "B", "F#", "C#", "G#", "D#"
     ]),
     "3": ScaleInfo("Phrygian",       "HWWWHWW", [
-        "Eb4", "Bb4", "F4", "C4", "G4", "D4", "A4",
-        "E4", "B4", "F#4", "C#4", "G#4", "D#4", "A#4", "E#4"
+        "Eb", "Bb", "F", "C", "G", "D", "A",
+        "E", "B", "F#", "C#", "G#", "D#", "A#", "E#"
     ]),
     "4": ScaleInfo("Lydian",         "WWWHWWH", [
-        "Fb4", "Cb4", "Gb4", "Db4", "Ab4", "Eb4", "Bb4",
-        "F4", "C4", "G4", "D4", "A4", "E4", "B4", "F#4"
+        "Fb", "Cb", "Gb", "Db", "Ab", "Eb", "Bb",
+        "F", "C", "G", "D", "A", "E", "B", "F#"
     ]),
     "5": ScaleInfo("Mixolydian",     "WWHWWHW", [
-        "Gb4", "Db4", "Ab4", "Eb4", "Bb4", "F4", "C4",
-        "G4", "D4", "A4", "E4", "B4", "F#4", "C#4", "G#4"
+        "Gb", "Db", "Ab", "Eb", "Bb", "F", "C",
+        "G", "D", "A", "E", "B", "F#", "C#", "G#"
     ]),
     "6": ScaleInfo("Aeolian",        "WHWWHWW", [
-        "Ab4", "Eb4", "Bb4", "F4", "C4", "G4", "D4",
-        "A4", "E4", "B4", "F#4", "C#4", "G#4", "D#4", "A#4"
+        "Ab", "Eb", "Bb", "F", "C", "G", "D",
+        "A", "E", "B", "F#", "C#", "G#", "D#", "A#"
     ]),
     "7": ScaleInfo("Lochrian",       "HWWHWWW", [
-        "Bb4", "F4", "C4", "G4", "D4", "A4", "E4",
-        "B4", "F#4", "C#4", "G#4", "D#4", "A#4", "E#4", "B#4"
+        "Bb", "F", "C", "G", "D", "A", "E",
+        "B", "F#", "C#", "G#", "D#", "A#", "E#", "B#"
     ])
 }
 
@@ -92,7 +106,25 @@ class Clef:
     symbol: str
     lowest_note: Note  # Note number 1, not 0
     sharps_pattern: [bool]  # True: up   a 5th, False: down a 4th
-    flats_pattern: [bool]  # True: down a 5th, False: up   a 4th
+    flats_pattern:  [bool]  # True: down a 5th, False: up   a 4th
+    all_notes: [str] = field(default_factory=list)
+    
+    def __post_init__(self):
+        """ Creates all_notes from lowest_note """
+        letter_now = self.lowest_note.letter
+        octave_now = self.lowest_note.octave
+        for i in range(STAFF_LINES + STAFF_SPACES
+                       + 2 * LEDGER_LINES
+                       - LETTERS_PER_OCTAVE):
+            temp_notes = [letter_now] * 3
+            temp_notes[0] += "b"
+            temp_notes[2] += "#"
+            temp_notes = [f"{note}{octave_now}" for note in temp_notes]
+            self.all_notes += temp_notes
+            
+            letter_now = get_next_letter(letter_now)
+            if letter_now == "C":
+                octave_now += 1
 
 
 class KeySignature:
@@ -341,16 +373,34 @@ class Scale:
     display: DesignerObject
     blur: DesignerObject
     
-    def __init__(self, pattern: str, starts_on: str, clef: str = "treble"):
+    def __init__(self,
+                 scale_type: ScaleInfo = None,
+                 starts_on: str = None,
+                 clef: str = None
+                 ):
         """
         Constructor for Scale.  Creates a scale given a scale pattern and a note
             to start on.
         
         Args:
-            pattern: The scale pattern (e.g. WWHWWWH for major)
-            starts_on: The note to start on
+            scale_type (ScaleInfo): The type of scale
+            starts_on (str): The name of the note to start on
                 (e.g. Ab3 for the A flat just bellow middle-C)
+            clef (str): The name of the clef
         """
+        if scale_type is None:
+            scale_type = choice(list(SCALE_TYPE_INFO.values()))
+        
+        pattern = scale_type.pattern
+        
+        if clef is None:
+            clef = choice(list(CLEFS.keys()))
+        
+        if starts_on is None:
+            possible_starts = (scale_type.possible_starts
+                               & set(CLEFS[clef].all_notes))
+            starts_on = choice(list(possible_starts))
+        
         int_p = [int_from_pattern(c) for c in pattern]
         if ensure_octave(int_p):
             self.pattern = int_p
