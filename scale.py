@@ -1,5 +1,9 @@
 # Imports for type checking
 from __future__ import annotations
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from world import World
 
 # Normal imports
 from designer import *
@@ -7,7 +11,6 @@ from useful import int_from_pattern, ensure_octave, get_next_letter, \
     pm_bool, cmp
 from dataclasses import dataclass, field
 from random import choice
-
 
 # I might change these to better symbols at some point.
 SHARP = '#'
@@ -100,6 +103,12 @@ SCALE_TYPE_INFO = {
     ])
 }
 
+# A dictionary to store the mapping of the names of scale types to the key that
+# must be pressed to choose the type of scale
+SCALE_TYPE_KEYS = {
+    scale_info.name: key for key, scale_info in SCALE_TYPE_INFO.items()
+}
+
 
 @dataclass
 class Clef:
@@ -108,22 +117,39 @@ class Clef:
     lowest_note: Note  # Note number 1, not 0
     sharps_pattern: [bool]  # True: up   a 5th, False: down a 4th
     flats_pattern:  [bool]  # True: down a 5th, False: up   a 4th
-    all_notes: [str] = field(default_factory=list)
     
-    def __post_init__(self):
-        """ Creates all_notes from lowest_note """
+    def all_notes(self, world: World) -> set:
+        """
+            Creates a set of all possible starting notes from lowest_note
+            
+            Args:
+                world (World): The world from which to get settings
+            
+            Returns:
+                set: The set of all possible starting notes for this clef, given
+                    the number of ledger lines as defined in `world.settings`
+        """
+        all_notes = []
         letter_now = self.lowest_note.letter
         octave_now = self.lowest_note.octave
         for i in range(TOTAL_NOTES - LETTERS_PER_OCTAVE):
             temp_notes = [letter_now] * 3
-            temp_notes[0] += "b"
-            temp_notes[2] += "#"
+            temp_notes[0] += FLAT
+            temp_notes[2] += SHARP
             temp_notes = [f"{note}{octave_now}" for note in temp_notes]
-            self.all_notes += temp_notes
+            all_notes += temp_notes
             
             letter_now = get_next_letter(letter_now)
             if letter_now == "C":
                 octave_now += 1
+                
+        return set(
+            all_notes[
+                3 * (LEDGER_LINES - world.settings.max_low_ledger_positions)
+                :len(all_notes) -
+                3 * (LEDGER_LINES - world.settings.max_high_ledger_positions)
+            ]
+        )
 
 
 class KeySignature:
@@ -393,6 +419,7 @@ class Scale:
     blur: DesignerObject
     
     def __init__(self,
+                 world: World,
                  scale_type: ScaleInfo = None,
                  starts_on: str = None,
                  clef: str = None
@@ -408,16 +435,27 @@ class Scale:
             clef (str): The name of the clef
         """
         if scale_type is None:
-            scale_type = choice(list(SCALE_TYPE_INFO.values()))
+            possible_scale_types = (
+                set(world.settings.scale_types)
+                & set(SCALE_TYPE_KEYS)
+            )
+            scale_name = SCALE_TYPE_KEYS[choice(list(possible_scale_types))]
+            scale_type = SCALE_TYPE_INFO[scale_name]
         
         pattern = scale_type.pattern
         
         if clef is None:
-            clef = choice(list(CLEFS.keys()))
+            possible_clefs = (
+                set(world.settings.clefs)
+                & set(CLEFS)
+            )
+            clef = choice(list(possible_clefs))
         
         if starts_on is None:
-            possible_starts = (scale_type.possible_starts
-                               & set(CLEFS[clef].all_notes))
+            possible_starts = (
+                scale_type.possible_starts
+                & CLEFS[clef].all_notes(world)
+            )
             starts_on = choice(list(possible_starts))
         
         int_p = [int_from_pattern(c) for c in pattern]

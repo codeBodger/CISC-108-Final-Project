@@ -54,7 +54,7 @@ class Boulder:
                 world.selected = self.boulder.x
                 self.boulder.alpha = 1
     
-        self.scale = Scale()
+        self.scale = Scale(world)
         self.scale.make_text(self.boulder.x, self.boulder.y)
     
     def is_colliding_somewhere(self, world: World) -> bool:

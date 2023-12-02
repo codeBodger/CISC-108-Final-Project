@@ -2,6 +2,7 @@ from typing import Union, Any
 from collections.abc import Iterable, Callable
 from dataclasses import dataclass
 from designer import *
+import random
 
 
 def pm_bool(b: bool) -> int:
@@ -212,14 +213,14 @@ class Menu:
 
     def select(self, key: str, *args, **kwargs) -> bool:
         try:
-            choice = (int(
+            selection = (int(
                 str(key)
                 .replace("[", "")
                 .replace("]", ""))
-                      - 1)
-            if choice < 0:
+                         - 1)
+            if selection < 0:
                 raise IndexError("Negatives are out of bounds here.")
-            self.entries[choice](*args, **kwargs)
+            self.entries[selection](*args, **kwargs)
             return True
         except (ValueError, IndexError):
             return False
@@ -229,3 +230,21 @@ class Menu:
 
 
 FONT_PATH = "resources/Game Font.ttf"
+
+
+def choice(iterable: Iterable):
+    """
+    Takes in any iterable, tries to use random.choice() on it.  If it fails,
+        converts the iterable to list and runs choice on that.
+        
+    Args:
+        iterable (Iterable): Any Iterable from which to get a random element
+        
+    Returns:
+        A random element of iterable
+    """
+    try:
+        ret = random.choice(iterable)
+    except TypeError:
+        ret = random.choice(list(iterable))
+    return ret
