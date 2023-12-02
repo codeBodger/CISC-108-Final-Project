@@ -5,8 +5,7 @@ from boulder import Boulder
 from settings import Settings
 from useful import pm_bool, int_from_pattern, MatchStr, MatchIter, \
     GAME_FONT_PATH, TEXT_FONT_NAME, GAME_FONT_NAME
-from scale import SCALE_TYPE_INFO
-
+from scale import SCALE_TYPE_INFO, SCALE_TYPE_KEYS
 
 GUTTER = 200  # How far away from the right to put the score and other info
 FAILED_BOULDER_PENALTY = -5
@@ -35,13 +34,16 @@ class World:
             __init__().  This was the best that I could come up with).
             Initialises the world with no boulders and a score of 0.
         """
+        self.settings = Settings.load()
+        
         self.text_score = text(
             'black', f"{self.score:.4}", 30,
             get_width(), 20,
             font_name=GAME_FONT_NAME, font_path=GAME_FONT_PATH)
+        scale_keys_set = set(SCALE_TYPE_KEYS) & set(self.settings.scale_types)
         scale_keys_strs = [
-            f"{key}: {scale_type.name}"
-            for key, scale_type in SCALE_TYPE_INFO.items()
+            f"{SCALE_TYPE_KEYS[scale_type_name]}: {scale_type_name}"
+            for scale_type_name in scale_keys_set
         ]
         self.scale_keys_text = []
         for i, scale_keys_str in enumerate(scale_keys_strs):
@@ -51,8 +53,6 @@ class World:
                      font_name=TEXT_FONT_NAME)
             )
         
-        self.settings = Settings.load()
-
     def move_boulders_down(self):
         """
         Loops through all of the boulders and moves them down.
