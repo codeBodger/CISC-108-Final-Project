@@ -36,7 +36,6 @@ class Settings(object):
         
         self = super().__new__(cls)
         self.__init__(**config)
-        print(cls)
         return self
     
     def save(self):
