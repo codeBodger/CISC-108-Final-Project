@@ -10,7 +10,7 @@ from designer import *
 from useful import int_from_pattern, ensure_octave, get_next_letter, \
     pm_bool, cmp
 from dataclasses import dataclass, field
-from random import choice
+from useful import choice
 
 # I might change these to better symbols at some point.
 SHARP = '#'
@@ -439,7 +439,7 @@ class Scale:
                 set(world.settings.scale_types)
                 & set(SCALE_TYPE_KEYS)
             )
-            scale_name = SCALE_TYPE_KEYS[choice(list(possible_scale_types))]
+            scale_name = SCALE_TYPE_KEYS[choice(possible_scale_types)]
             scale_type = SCALE_TYPE_INFO[scale_name]
         
         pattern = scale_type.pattern
@@ -449,14 +449,14 @@ class Scale:
                 set(world.settings.clefs)
                 & set(CLEFS)
             )
-            clef = choice(list(possible_clefs))
+            clef = choice(possible_clefs)
         
         if starts_on is None:
             possible_starts = (
                 scale_type.possible_starts
                 & CLEFS[clef].all_notes(world)
             )
-            starts_on = choice(list(possible_starts))
+            starts_on = choice(possible_starts)
         
         int_p = [int_from_pattern(c) for c in pattern]
         if ensure_octave(int_p):
