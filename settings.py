@@ -55,10 +55,24 @@ class SettingsScreen(Menu):
 
 
 def ledger_lines(menu: SettingsScreen, update: bool = False):
+    menu.settings.max_low_ledger_positions = min(
+        menu.settings.max_low_ledger_positions, LEDGER_LINES
+    )
+    menu.settings.max_high_ledger_positions = min(
+        menu.settings.max_high_ledger_positions, LEDGER_LINES
+    )
+    menu.settings.max_low_ledger_positions = max(
+        menu.settings.max_low_ledger_positions, 0
+    )
+    menu.settings.max_high_ledger_positions = max(
+        menu.settings.max_high_ledger_positions, 0
+    )
+    
     low_ledger_line  = chr(NOTES_START + LEDGER_LINES + 1
                            - menu.settings.max_low_ledger_positions)
     high_ledger_line = chr(NOTES_START + TOTAL_NOTES - LEDGER_LINES
                            + menu.settings.max_high_ledger_positions)
+    
     if update:
         menu.sub_menu[0].text = low_ledger_line
         menu.sub_menu[0].alpha = 1. if menu.active_sub_menu_left else .3
