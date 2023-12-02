@@ -35,8 +35,7 @@ class Settings(object):
         except FileNotFoundError:
             config = DEFAULT_CONFIG
         
-        self = super().__new__(cls)
-        self.__init__(**config)
+        self = Settings(**config)
         return self
     
     def save(self):
