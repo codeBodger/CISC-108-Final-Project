@@ -500,7 +500,7 @@ class Scale:
         for up_by in self.pattern:
             disp_text += " "
             this_note = this_note.up_by(up_by, len(self.pattern))
-            disp_text += this_note.string_form()
+            disp_text += repr(this_note)
         
         if "Fb" in disp_text:
             print("hi")
