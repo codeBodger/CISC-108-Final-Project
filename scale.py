@@ -352,14 +352,34 @@ class Note:
 
 
 CLEFS = {
-    "bass":   Clef("bass",   '\uE0A9', Note("C2"),
-                   [False, True, False, True, False, True],
-                   [False, True, False, False, True, False]
-                   ),
-    "treble": Clef("treble", '\uE0AE', Note("A3"),
-                   [False, True, False, True, False, True],
-                   [False, True, False, False, True, False]
-                   )
+    "Bass":          Clef("Bass",          '\uE0A9', Note("C2"),
+                          [False, True, False, False, True, False],
+                          [False, True, False, True, False, True]
+                          ),
+    "Treble":        Clef("Treble",        '\uE0AE', Note("A3"),
+                          [False, True, False, False, True, False],
+                          [False, True, False, True, False, True]
+                          ),
+    "Baritone":      Clef("Baritone",      '\uE0AB', Note("B2"),
+                          [True, False, True, False, False, True],
+                          [True, False, True, False, True, False]
+                          ),
+    "Tenor":         Clef("Tenor",         '\uE0AD', Note("D3"),
+                          [True, False, True, False, True, False],
+                          [False, True, False, True, False, True]
+                          ),
+    "Alto":          Clef("Alto",          '\uE0AF', Note("F3"),
+                          [False, True, False, False, True, False],
+                          [False, True, False, True, False, True]
+                          ),
+    "Mezzo-Soprano": Clef("Mezzo-Soprano", '\uE0AA', Note("A3"),
+                          [False, True, False, True, False, True],
+                          [True, False, True, False, True, False]
+                          ),
+    "Soprano":       Clef("Soprano",       '\uE0AC', Note("C4"),
+                          [True, False, True, False, True, False],
+                          [True, False, True, False, True, False]
+                          )
 }
 
 
