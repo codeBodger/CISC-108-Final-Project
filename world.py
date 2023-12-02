@@ -2,6 +2,7 @@ from designer import *
 from random import random as rand
 from dataclasses import dataclass, field
 from boulder import Boulder
+from settings import Settings
 from useful import pm_bool, int_from_pattern, MatchStr, MatchIter, FONT_PATH
 from scale import SCALE_TYPE_INFO
 
@@ -23,6 +24,7 @@ class World:
     score: float = 0.
     selected: int = 0  # The key of the selected boulder, its x-coordinate
     paused: bool = False
+    settings: Settings = None
     
     def __post_init__(self):
         """
@@ -46,6 +48,8 @@ class World:
                      get_width() - GUTTER, 80 + 40*i, anchor="midleft",
                      font_name="Times New Roman")
             )
+        
+        self.settings = Settings.load()
 
     def move_boulders_down(self):
         """
