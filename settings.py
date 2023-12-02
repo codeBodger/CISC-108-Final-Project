@@ -4,8 +4,10 @@ from dataclasses import dataclass, asdict, field
 from useful import Menu, MenuEntry, GAME_FONT_PATH, pm_bool, GAME_FONT_NAME
 from scale import TOTAL_NOTES, LEDGER_LINES, NOTES_START, LETTERS_PER_OCTAVE
 
+
 DEFAULT_CONFIG = {
-    "scale_types": ["Major", "Natural Minor", "Harmonic Minor", "Melodic Minor"],
+    "scale_types": ["Major",
+                    "Natural Minor", "Harmonic Minor", "Melodic Minor"],
     "clefs": ["Treble", "Bass"],
     "max_sharps_key_signature": 4,
     "max_flats_key_signature": 4,
