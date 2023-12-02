@@ -1,5 +1,4 @@
 import json
-from typing import Any
 from designer import *
 from dataclasses import dataclass, asdict, field
 from useful import Menu, MenuEntry, FONT_PATH, pm_bool
