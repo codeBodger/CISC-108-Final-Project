@@ -200,7 +200,7 @@ class Menu:
         
         self.menu_label = text(
             "black", self.header, self.resize(40),
-            x, self.resize(40), anchor
+            x, self.resize(40), anchor, font_name=TEXT_FONT_NAME
         )
         
         self.menu_text = []
@@ -208,7 +208,7 @@ class Menu:
             self.menu_text.append(text(
                 "black", f"{i + 1}. {menu_entry.label}",
                 self.resize(30),
-                x, self.resize(100 + 50 * i), anchor
+                x, self.resize(100 + 50 * i), anchor, font_name=TEXT_FONT_NAME
             ))
 
     def select(self, key: str, *args, **kwargs) -> bool:
@@ -229,7 +229,9 @@ class Menu:
         return value * self.size_percent // 100
 
 
-FONT_PATH = "resources/Game Font.ttf"
+GAME_FONT_PATH = "resources/Game Font.ttf"
+GAME_FONT_NAME = "Game Font"
+TEXT_FONT_NAME = "Times New Roman"
 
 
 def choice(iterable: Iterable):

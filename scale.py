@@ -8,7 +8,7 @@ if TYPE_CHECKING:
 # Normal imports
 from designer import *
 from useful import int_from_pattern, ensure_octave, get_next_letter, \
-    pm_bool, cmp
+    pm_bool, cmp, GAME_FONT_NAME, GAME_FONT_PATH
 from dataclasses import dataclass, field
 from useful import choice
 
@@ -470,7 +470,7 @@ class Scale:
                                     BACKGROUND_WIDTH,BACKGROUND_HEIGHT)
         self.display = text(
             'black', "", SCALE_TEXT_SIZE,
-            font_name="Game Font", font_path="resources/Game Font.ttf"
+            font_name=GAME_FONT_NAME, font_path=GAME_FONT_PATH
         )
         self.blur = image("resources/blurred_scale.png")
     

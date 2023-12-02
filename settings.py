@@ -1,7 +1,7 @@
 import json
 from designer import *
 from dataclasses import dataclass, asdict, field
-from useful import Menu, MenuEntry, FONT_PATH, pm_bool
+from useful import Menu, MenuEntry, GAME_FONT_PATH, pm_bool, GAME_FONT_NAME
 from scale import TOTAL_NOTES, LEDGER_LINES, NOTES_START
 
 
@@ -80,10 +80,10 @@ def ledger_lines(menu: SettingsScreen, update: bool = False):
         menu.active_sub_menu = "ledger lines"
         menu.active_sub_menu_left = True
         menu.sub_menu = [
-            text('black', low_ledger_line,  60, anchor="midright",
-                 font_name="Game Font", font_path=FONT_PATH),
+            text('black', low_ledger_line, 60, anchor="midright",
+                 font_name=GAME_FONT_NAME, font_path=GAME_FONT_PATH),
             text('black', high_ledger_line, 60, anchor="midleft",
-                 font_name="Game Font", font_path=FONT_PATH, alpha=.3)
+                 font_name=GAME_FONT_NAME, font_path=GAME_FONT_PATH, alpha=.3)
         ]
         menu.sub_menu[0].x -= 30
         menu.sub_menu[1].x += 30

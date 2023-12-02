@@ -3,7 +3,8 @@ from random import random as rand
 from dataclasses import dataclass, field
 from boulder import Boulder
 from settings import Settings
-from useful import pm_bool, int_from_pattern, MatchStr, MatchIter, FONT_PATH
+from useful import pm_bool, int_from_pattern, MatchStr, MatchIter, \
+    GAME_FONT_PATH, TEXT_FONT_NAME, GAME_FONT_NAME
 from scale import SCALE_TYPE_INFO
 
 
@@ -34,9 +35,10 @@ class World:
             __init__().  This was the best that I could come up with).
             Initialises the world with no boulders and a score of 0.
         """
-        self.text_score = text('black', f"{self.score:.4}", 30,
-                               get_width(), 20,
-                               font_name="Game Font", font_path=FONT_PATH)
+        self.text_score = text(
+            'black', f"{self.score:.4}", 30,
+            get_width(), 20,
+            font_name=GAME_FONT_NAME, font_path=GAME_FONT_PATH)
         scale_keys_strs = [
             f"{key}: {scale_type.name}"
             for key, scale_type in SCALE_TYPE_INFO.items()
@@ -46,7 +48,7 @@ class World:
             self.scale_keys_text.append(
                 text('black', scale_keys_str, 20,
                      get_width() - GUTTER, 80 + 40*i, anchor="midleft",
-                     font_name="Times New Roman")
+                     font_name=TEXT_FONT_NAME)
             )
         
         self.settings = Settings.load()
