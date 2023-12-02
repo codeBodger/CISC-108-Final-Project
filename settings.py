@@ -2,8 +2,7 @@ import json
 from designer import *
 from dataclasses import dataclass, asdict, field
 from useful import Menu, MenuEntry, GAME_FONT_PATH, pm_bool, GAME_FONT_NAME
-from scale import TOTAL_NOTES, LEDGER_LINES, NOTES_START
-
+from scale import TOTAL_NOTES, LEDGER_LINES, NOTES_START, LETTERS_PER_OCTAVE
 
 DEFAULT_CONFIG = {
     "scale_types": ["Major", "Natural Minor", "Harmonic Minor", "Melodic Minor"],
@@ -24,6 +23,9 @@ class Settings(object):
     max_high_ledger_positions: int
     max_low_ledger_positions: int
     
+    def __post_init__(self):
+        self.validate()
+    
     @classmethod
     def load(cls):
         try:
@@ -42,6 +44,38 @@ class Settings(object):
         config_string = json.dumps(config, indent=2)
         with open(".config.json", "w") as f:
             f.write(config_string)
+    
+    def validate(self):
+        self.validate_key_signatures()
+        self.validate_ledger_lines()
+        
+    def validate_key_signatures(self):
+        self.max_sharps_key_signature = min(
+            self.max_sharps_key_signature, LETTERS_PER_OCTAVE
+        )
+        self.max_flats_key_signature = min(
+            self.max_flats_key_signature, LETTERS_PER_OCTAVE
+        )
+        self.max_sharps_key_signature = max(
+            self.max_sharps_key_signature, 0
+        )
+        self.max_flats_key_signature = max(
+            self.max_flats_key_signature, 0
+        )
+    
+    def validate_ledger_lines(self):
+        self.max_low_ledger_positions = min(
+            self.max_low_ledger_positions, LEDGER_LINES
+        )
+        self.max_high_ledger_positions = min(
+            self.max_high_ledger_positions, LEDGER_LINES
+        )
+        self.max_low_ledger_positions = max(
+            self.max_low_ledger_positions, 0
+        )
+        self.max_high_ledger_positions = max(
+            self.max_high_ledger_positions, 0
+        )
 
 
 @dataclass
@@ -53,18 +87,7 @@ class SettingsScreen(Menu):
 
 
 def ledger_lines(menu: SettingsScreen, update: bool = False):
-    menu.settings.max_low_ledger_positions = min(
-        menu.settings.max_low_ledger_positions, LEDGER_LINES
-    )
-    menu.settings.max_high_ledger_positions = min(
-        menu.settings.max_high_ledger_positions, LEDGER_LINES
-    )
-    menu.settings.max_low_ledger_positions = max(
-        menu.settings.max_low_ledger_positions, 0
-    )
-    menu.settings.max_high_ledger_positions = max(
-        menu.settings.max_high_ledger_positions, 0
-    )
+    menu.settings.validate_ledger_lines()
     
     low_ledger_line  = chr(NOTES_START + LEDGER_LINES + 1
                            - menu.settings.max_low_ledger_positions)
