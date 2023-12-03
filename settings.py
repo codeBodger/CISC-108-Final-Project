@@ -82,14 +82,13 @@ class Settings(object):
 @dataclass
 class SettingsScreen(Menu):
     header: str = "Settings: Press a number key to continue"
-    entries: [MenuEntry] = None
+    entries: [MenuEntry] = field(default_factory=list)
     settings: Settings = field(default_factory=Settings.load)
     active_sub_menu: str = ""
     active_sub_menu_left: bool = True
     sub_menu: [DesignerObject] = None
     
     def __post_init__(self):
-        super().__post_init__()
         self.entries = [
             MenuEntry("Enable/Disable Standard Scales", print, "Standard Scales"),
             MenuEntry("Enable/Disable Church Modes", print, "Church Modes"),
@@ -97,6 +96,7 @@ class SettingsScreen(Menu):
             MenuEntry("Increase/Decrease Key Signature Range", print, "Keys"),
             MenuEntry("Increase/Decrease Ledger Lines", self.ledger_lines)
         ]
+        super().__post_init__()
 
     def ledger_lines(self):
         self.settings.validate_ledger_lines()
@@ -153,7 +153,7 @@ def void_keyPressed(menu: SettingsScreen, key: str):
                 menu.settings.max_high_ledger_positions -= change
             menu.ledger_lines()
         case _:
-            if not menu.select(key, menu):
+            if not menu.select(key):
                 match key:
                     case "escape":
                         menu.settings.save()
