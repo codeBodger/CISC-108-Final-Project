@@ -110,8 +110,8 @@ class SettingsScreen(Menu):
             self.sub_menu[0].text = low_ledger_line
             self.sub_menu[0].alpha = 1. if self.active_sub_menu_left else .3
             self.sub_menu[1].text = high_ledger_line
-        else:
             self.sub_menu[1].alpha = .3 if self.active_sub_menu_left else 1.
+        else:
             self.active_sub_menu = "ledger lines"
             self.active_sub_menu_left = True
             self.sub_menu = [
