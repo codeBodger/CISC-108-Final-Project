@@ -4,7 +4,7 @@ from dataclasses import dataclass, asdict, field
 from useful import Menu, MenuEntry, GAME_FONT_PATH, pm_bool, GAME_FONT_NAME, make_scale_keys_text, GUTTER, \
     TEXT_FONT_NAME
 from scale import TOTAL_NOTES, LEDGER_LINES, NOTES_START, LETTERS_PER_OCTAVE, \
-    NORMAL_SCALE_NAMES
+    NORMAL_SCALE_NAMES, SCALE_TYPE_INFO, NORMAL_SCALE_KEYS
 
 DEFAULT_CONFIG = {
     "scale_types": ["Major",
@@ -101,12 +101,18 @@ class SettingsScreen(Menu):
         super().__post_init__()
 
     def standard_scales(self):
-        self.active_sub_menu = "standard scales"
-        self.sub_menu = [
-            text('black', "Type a key to Enable/Disable a scale type", 24,
-                 font_name=TEXT_FONT_NAME)
-        ]
-        self.sub_menu += make_scale_keys_text(NORMAL_SCALE_NAMES)
+        if self.active_sub_menu != "standard scales":
+            self.active_sub_menu = "standard scales"
+            self.sub_menu = [
+                text('black', "Type a key to Enable/Disable a scale type", 24,
+                     font_name=TEXT_FONT_NAME)
+            ]
+            self.sub_menu += make_scale_keys_text(NORMAL_SCALE_NAMES)
+        for scale_type_text in self.sub_menu[1:]:
+            if scale_type_text.text[3:] in self.settings.scale_types:
+                scale_type_text.alpha = 1.
+            else:
+                scale_type_text.alpha = .3
 
     def ledger_lines(self):
         self.settings.validate_ledger_lines()
@@ -162,6 +168,19 @@ def void_keyPressed(menu: SettingsScreen, key: str):
             else:
                 menu.settings.max_high_ledger_positions -= change
             menu.ledger_lines()
+        case "standard scales":
+            if key == 'escape':
+                menu.exit_sub_menu()
+                return
+            if key not in NORMAL_SCALE_KEYS:
+                return
+            scale_name = SCALE_TYPE_INFO[key].name
+            if scale_name in NORMAL_SCALE_NAMES:
+                if scale_name in menu.settings.scale_types:
+                    menu.settings.scale_types.remove(scale_name)
+                else:
+                    menu.settings.scale_types.append(scale_name)
+            menu.standard_scales()
         case _:
             if not menu.select(key):
                 match key:
