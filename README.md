@@ -57,6 +57,9 @@ guessing.
 - [x] Create a settings menu
   - [x] Allow the user to enter the settings menu from the main menu
   - [ ] Allow the user to select different types of scale
+    - [x] Standard Scales
+    - [ ] Church Modes
+    - [ ] Reset to default if none selected
   - [ ] Allow the user to select different clefs
   - [ ] Allow the user to select different key signatures
   - [x] Allow the user to select different amounts of ledger lines
