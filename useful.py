@@ -250,3 +250,22 @@ def choice(iterable: Iterable):
     except TypeError:
         ret = random.choice(list(iterable))
     return ret
+
+
+GUTTER = 200  # How far away from the right to put the score and other info
+
+
+def make_scale_keys_text(scale_keys_set) -> [DesignerObject]:
+    from scale import SCALE_TYPE_KEYS
+    scale_keys_strs = [
+        f"{SCALE_TYPE_KEYS[scale_type_name]}: {scale_type_name}"
+        for scale_type_name in scale_keys_set
+    ]
+    scale_keys_text = []
+    for i, scale_keys_str in enumerate(scale_keys_strs):
+        scale_keys_text.append(
+            text('black', scale_keys_str, 20,
+                 get_width() - GUTTER, 80 + 40 * i, anchor="midleft",
+                 font_name=TEXT_FONT_NAME)
+        )
+    return scale_keys_text

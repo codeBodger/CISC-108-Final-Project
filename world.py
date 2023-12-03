@@ -4,10 +4,9 @@ from dataclasses import dataclass, field
 from boulder import Boulder
 from settings import Settings
 from useful import pm_bool, int_from_pattern, MatchStr, MatchIter, \
-    GAME_FONT_PATH, TEXT_FONT_NAME, GAME_FONT_NAME
+    GAME_FONT_PATH, GAME_FONT_NAME, make_scale_keys_text, GUTTER
 from scale import SCALE_TYPE_INFO, SCALE_TYPE_KEYS
 
-GUTTER = 200  # How far away from the right to put the score and other info
 FAILED_BOULDER_PENALTY = -5
 
 BOULDER_MAX_PROB = 2 ** -6
@@ -41,17 +40,7 @@ class World:
             get_width(), 20,
             font_name=GAME_FONT_NAME, font_path=GAME_FONT_PATH)
         scale_keys_set = set(SCALE_TYPE_KEYS) & set(self.settings.scale_types)
-        scale_keys_strs = [
-            f"{SCALE_TYPE_KEYS[scale_type_name]}: {scale_type_name}"
-            for scale_type_name in scale_keys_set
-        ]
-        self.scale_keys_text = []
-        for i, scale_keys_str in enumerate(scale_keys_strs):
-            self.scale_keys_text.append(
-                text('black', scale_keys_str, 20,
-                     get_width() - GUTTER, 80 + 40*i, anchor="midleft",
-                     font_name=TEXT_FONT_NAME)
-            )
+        self.scale_keys_text = make_scale_keys_text(scale_keys_set)
         
     def move_boulders_down(self):
         """
