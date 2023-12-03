@@ -109,8 +109,8 @@ SCALE_TYPE_KEYS = {
     scale_info.name: key for key, scale_info in SCALE_TYPE_INFO.items()
 }
 
-NORMAL_SCALE_KEYS = ['q', 'w', 'e', 'r']
-CHURCH_MODES_KEYS = [f"{i}" for i in range(LETTERS_PER_OCTAVE + 1)]
+NORMAL_SCALE_KEYS = {'q', 'w', 'e', 'r'}
+CHURCH_MODES_KEYS = {f"{i}" for i in range(LETTERS_PER_OCTAVE + 1)}
 
 
 @dataclass
