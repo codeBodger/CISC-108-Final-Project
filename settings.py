@@ -81,59 +81,58 @@ class Settings(object):
 
 @dataclass
 class SettingsScreen(Menu):
+    header: str = "Settings: Press a number key to continue"
+    entries: [MenuEntry] = None
     settings: Settings = field(default_factory=Settings.load)
-    active_sub_menu: str = None
+    active_sub_menu: str = ""
     active_sub_menu_left: bool = True
     sub_menu: [DesignerObject] = None
-
-
-def ledger_lines(menu: SettingsScreen, update: bool = False):
-    menu.settings.validate_ledger_lines()
     
-    low_ledger_line  = chr(NOTES_START + LEDGER_LINES + 1
-                           - menu.settings.max_low_ledger_positions)
-    high_ledger_line = chr(NOTES_START + TOTAL_NOTES - LEDGER_LINES
-                           + menu.settings.max_high_ledger_positions)
-    
-    if update:
-        menu.sub_menu[0].text = low_ledger_line
-        menu.sub_menu[0].alpha = 1. if menu.active_sub_menu_left else .3
-        menu.sub_menu[1].text = high_ledger_line
-        menu.sub_menu[1].alpha = .3 if menu.active_sub_menu_left else 1.
-    else:
-        menu.active_sub_menu = "ledger lines"
-        menu.active_sub_menu_left = True
-        menu.sub_menu = [
-            text('black', low_ledger_line, 60, anchor="midright",
-                 font_name=GAME_FONT_NAME, font_path=GAME_FONT_PATH),
-            text('black', high_ledger_line, 60, anchor="midleft",
-                 font_name=GAME_FONT_NAME, font_path=GAME_FONT_PATH, alpha=.3)
+    def __post_init__(self):
+        super().__post_init__()
+        self.entries = [
+            MenuEntry("Enable/Disable Standard Scales", print, "Standard Scales"),
+            MenuEntry("Enable/Disable Church Modes", print, "Church Modes"),
+            MenuEntry("Enable/Disable Clefs", print, "Clefs"),
+            MenuEntry("Increase/Decrease Key Signature Range", print, "Keys"),
+            MenuEntry("Increase/Decrease Ledger Lines", self.ledger_lines)
         ]
-        menu.sub_menu[0].x -= 30
-        menu.sub_menu[1].x += 30
 
+    def ledger_lines(self):
+        self.settings.validate_ledger_lines()
+        
+        low_ledger_line  = chr(NOTES_START + LEDGER_LINES + 1
+                               - self.settings.max_low_ledger_positions)
+        high_ledger_line = chr(NOTES_START + TOTAL_NOTES - LEDGER_LINES
+                               + self.settings.max_high_ledger_positions)
+        
+        if self.active_sub_menu == "ledger lines":
+            self.sub_menu[0].text = low_ledger_line
+            self.sub_menu[0].alpha = 1. if self.active_sub_menu_left else .3
+            self.sub_menu[1].text = high_ledger_line
+        else:
+            self.sub_menu[1].alpha = .3 if self.active_sub_menu_left else 1.
+            self.active_sub_menu = "ledger lines"
+            self.active_sub_menu_left = True
+            self.sub_menu = [
+                text('black', low_ledger_line, 60, anchor="midright",
+                     font_name=GAME_FONT_NAME, font_path=GAME_FONT_PATH),
+                text('black', high_ledger_line, 60, anchor="midleft",
+                     font_name=GAME_FONT_NAME, font_path=GAME_FONT_PATH, alpha=.3)
+            ]
+            self.sub_menu[0].x -= 30
+            self.sub_menu[1].x += 30
 
-HEADER = "Settings: Press a number key to continue"
-ENTRIES = [
-    MenuEntry("Enable/Disable Standard Scales", print, "Standard Scales"),
-    MenuEntry("Enable/Disable Church Modes", print, "Church Modes"),
-    MenuEntry("Enable/Disable Clefs", print, "Clefs"),
-    MenuEntry("Increase/Decrease Key Signature Range", print, "Keys"),
-    MenuEntry("Increase/Decrease Ledger Lines", ledger_lines)
-]
-
-
-def exit_sub_menu(menu: SettingsScreen):
-    menu.active_sub_menu = None
-    menu.active_sub_menu_left = True
-    for designer_object in menu.sub_menu:
-        destroy(designer_object)
-    menu.sub_menu = None
+    def exit_sub_menu(self):
+        self.active_sub_menu = ""
+        self.active_sub_menu_left = True
+        for designer_object in self.sub_menu:
+            destroy(designer_object)
+        self.sub_menu = None
 
 
 def void_setup():
-    return SettingsScreen(HEADER, ENTRIES,
-                          left=True, size_percent=70, margin_left=20)
+    return SettingsScreen(left=True, size_percent=70, margin_left=20)
 
 
 def void_keyPressed(menu: SettingsScreen, key: str):
@@ -146,13 +145,13 @@ def void_keyPressed(menu: SettingsScreen, key: str):
                 case 'up' | 'down':
                     change = pm_bool(key == 'down')
                 case 'escape':
-                    exit_sub_menu(menu)
+                    menu.exit_sub_menu()
                     return
             if menu.active_sub_menu_left:
                 menu.settings.max_low_ledger_positions  += change
             else:
                 menu.settings.max_high_ledger_positions -= change
-            ledger_lines(menu, update=True)
+            menu.ledger_lines()
         case _:
             if not menu.select(key, menu):
                 match key:
