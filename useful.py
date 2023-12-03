@@ -199,7 +199,7 @@ class Menu:
             anchor = 'center'
         
         self.menu_label = text(
-            "black", self.header, self.resize(40),
+            "black", self.header, self.resize(36),
             x, self.resize(40), anchor, font_name=TEXT_FONT_NAME
         )
         
@@ -207,7 +207,7 @@ class Menu:
         for i, menu_entry in enumerate(self.entries):
             self.menu_text.append(text(
                 "black", f"{i + 1}. {menu_entry.label}",
-                self.resize(30),
+                self.resize(28),
                 x, self.resize(100 + 50 * i), anchor, font_name=TEXT_FONT_NAME
             ))
 

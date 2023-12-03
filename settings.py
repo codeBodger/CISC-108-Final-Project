@@ -1,9 +1,10 @@
 import json
 from designer import *
 from dataclasses import dataclass, asdict, field
-from useful import Menu, MenuEntry, GAME_FONT_PATH, pm_bool, GAME_FONT_NAME
-from scale import TOTAL_NOTES, LEDGER_LINES, NOTES_START, LETTERS_PER_OCTAVE
-
+from useful import Menu, MenuEntry, GAME_FONT_PATH, pm_bool, GAME_FONT_NAME, make_scale_keys_text, GUTTER, \
+    TEXT_FONT_NAME
+from scale import TOTAL_NOTES, LEDGER_LINES, NOTES_START, LETTERS_PER_OCTAVE, \
+    NORMAL_SCALE_NAMES
 
 DEFAULT_CONFIG = {
     "scale_types": ["Major",
@@ -81,7 +82,8 @@ class Settings(object):
 
 @dataclass
 class SettingsScreen(Menu):
-    header: str = "Settings: Press a number key to continue"
+    header: str = "Settings: Press a number key to continue or "\
+                  "Esc to exit the menu or submenu"
     entries: [MenuEntry] = field(default_factory=list)
     settings: Settings = field(default_factory=Settings.load)
     active_sub_menu: str = ""
@@ -90,13 +92,21 @@ class SettingsScreen(Menu):
     
     def __post_init__(self):
         self.entries = [
-            MenuEntry("Enable/Disable Standard Scales", print, "Standard Scales"),
+            MenuEntry("Enable/Disable Standard Scales", self.standard_scales),
             MenuEntry("Enable/Disable Church Modes", print, "Church Modes"),
             MenuEntry("Enable/Disable Clefs", print, "Clefs"),
             MenuEntry("Increase/Decrease Key Signature Range", print, "Keys"),
             MenuEntry("Increase/Decrease Ledger Lines", self.ledger_lines)
         ]
         super().__post_init__()
+
+    def standard_scales(self):
+        self.active_sub_menu = "standard scales"
+        self.sub_menu = [
+            text('black', "Type a key to Enable/Disable a scale type", 24,
+                 font_name=TEXT_FONT_NAME)
+        ]
+        self.sub_menu += make_scale_keys_text(NORMAL_SCALE_NAMES)
 
     def ledger_lines(self):
         self.settings.validate_ledger_lines()
