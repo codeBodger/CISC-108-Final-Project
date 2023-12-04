@@ -130,6 +130,18 @@ class World:
         Selects the next boulder to the right (ignoring those above the window).
         """
         self.select(True)
+        
+    def select_lowest(self):
+        if not self.boulders:
+            self.selected = 0
+            return
+        lowest_boulder = list(self.boulders.values())[0]
+        for boulder in self.boulders.values():
+            if boulder.boulder.y > lowest_boulder.boulder.y:
+                lowest_boulder = boulder
+        self.selected = lowest_boulder.boulder.x
+        lowest_boulder.boulder.alpha = 1
+        
     
     def update_score(self, amount: float):
         """
