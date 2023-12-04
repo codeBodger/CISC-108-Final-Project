@@ -60,10 +60,10 @@ guessing.
     - [x] Standard Scales
     - [x] Church Modes
     - [x] Reset to default if none selected
-  - [ ] Allow the user to select different clefs
+  - [x] Allow the user to select different clefs
   - [x] Allow the user to select different amounts of ledger lines
   - [x] Allow the user to return from the settings menu by pressing escape
-- [ ] Ensure that the scales fit within the specs of the user-defined settings
+- [x] Ensure that the scales fit within the specs of the user-defined settings
 - [ ] Note, the settings menu is controlled using the number and arrow keys
 - [ ] Fix the order of the scale types in World
 

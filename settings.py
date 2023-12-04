@@ -4,7 +4,8 @@ from dataclasses import dataclass, asdict, field
 from useful import Menu, MenuEntry, GAME_FONT_PATH, pm_bool, GAME_FONT_NAME, make_scale_keys_text, GUTTER, \
     TEXT_FONT_NAME
 from scale import TOTAL_NOTES, LEDGER_LINES, NOTES_START, LETTERS_PER_OCTAVE, \
-    NORMAL_SCALE_NAMES, SCALE_TYPE_INFO, NORMAL_SCALE_KEYS, CHURCH_MODES_NAMES, CHURCH_MODES_KEYS
+    NORMAL_SCALE_NAMES, SCALE_TYPE_INFO, NORMAL_SCALE_KEYS, CHURCH_MODES_NAMES, CHURCH_MODES_KEYS, CLEFS, \
+    CLEF_SYMBOLS_NAMES
 
 DEFAULT_CONFIG = {
     "scale_types": ["Major",
@@ -98,14 +99,14 @@ class SettingsScreen(Menu):
     settings: Settings = field(default_factory=Settings.load)
     active_sub_menu: str = ""
     active_sub_menu_left: bool = True
-    sub_menu: [DesignerObject] = None
+    sub_menu: list[Text] | Menu | None = None
     
     def __post_init__(self):
         self.entries = [
             MenuEntry("Enable/Disable Standard Scales", self.standard_scales),
             MenuEntry("Enable/Disable Church Modes", self.church_modes),
-            MenuEntry("Enable/Disable Clefs", print, "Clefs"),
-            MenuEntry("Increase/Decrease Key Signature Range", print, "Keys"),
+            MenuEntry("Enable/Disable Clefs", self.clefs),
+            # MenuEntry("Increase/Decrease Key Signature Range", print, "Keys"),
             MenuEntry("Increase/Decrease Ledger Lines", self.ledger_lines)
         ]
         super().__post_init__()
@@ -138,6 +139,29 @@ class SettingsScreen(Menu):
             else:
                 scale_type_text.alpha = .3
 
+    def clefs(self):
+        if self.active_sub_menu != "clefs":
+            self.active_sub_menu = "clefs"
+            clef_entries = []
+            for clef in CLEFS.values():
+                clef_entry = MenuEntry(clef.symbol, self.toggle_clef, clef.name)
+                clef_entries.append(clef_entry)
+            self.sub_menu = Menu("Enable/Disable Clefs", clef_entries, left=True,
+                                 margin_left=500, margin_top=50,
+                                 body_font=(GAME_FONT_NAME, GAME_FONT_PATH))
+        for text_ in self.sub_menu.menu_text:
+            if CLEF_SYMBOLS_NAMES[text_.text[-1]] in self.settings.clefs:
+                text_.alpha = 1.
+            else:
+                text_.alpha = .3
+
+    def toggle_clef(self, clef_name):
+        if clef_name in self.settings.clefs:
+            self.settings.clefs.remove(clef_name)
+        else:
+            self.settings.clefs.append(clef_name)
+        self.clefs()
+
     def ledger_lines(self):
         self.settings.validate_ledger_lines()
         
@@ -166,8 +190,11 @@ class SettingsScreen(Menu):
     def exit_sub_menu(self):
         self.active_sub_menu = ""
         self.active_sub_menu_left = True
-        for designer_object in self.sub_menu:
-            destroy(designer_object)
+        if isinstance(self.sub_menu, Menu):
+            self.sub_menu.destroy()
+        if isinstance(self.sub_menu, list):
+            for designer_object in self.sub_menu:
+                destroy(designer_object)
         self.sub_menu = None
 
 
@@ -216,6 +243,10 @@ def void_keyPressed(menu: SettingsScreen, key: str):
                 else:
                     menu.settings.scale_types.append(scale_name)
             menu.church_modes()
+        case "clefs":
+            if not menu.sub_menu.select(key):
+                if key == "escape":
+                    menu.exit_sub_menu()
         case _:
             if not menu.select(key):
                 match key:

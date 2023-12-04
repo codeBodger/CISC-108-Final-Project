@@ -137,6 +137,11 @@ class MatchStr(str):
             return self in list(match_list)
 
 
+GAME_FONT_PATH = "resources/Game Font.ttf"
+GAME_FONT_NAME = "Game Font"
+TEXT_FONT_NAME = "Times New Roman"
+
+
 @dataclass
 class MenuEntry:
     label: str
@@ -189,6 +194,7 @@ class Menu:
     size_percent: int = 100
     margin_left: int = 0
     margin_top: int = 0
+    body_font: type[str, tuple[str, str]] = TEXT_FONT_NAME
     
     def __post_init__(self):
         if self.left:
@@ -200,15 +206,19 @@ class Menu:
         
         self.menu_label = text(
             "black", self.header, self.resize(36),
-            x, self.resize(40), anchor, font_name=TEXT_FONT_NAME
+            x, self.resize(40) + self.margin_top, anchor,
+            font_name=TEXT_FONT_NAME
         )
         
+        if isinstance(self.body_font, str):
+            self.body_font = (self.body_font, None)
         self.menu_text = []
         for i, menu_entry in enumerate(self.entries):
             self.menu_text.append(text(
                 "black", f"{i + 1}. {menu_entry.label}",
                 self.resize(28),
-                x, self.resize(100 + 50 * i), anchor, font_name=TEXT_FONT_NAME
+                x, self.resize(100 + 50 * i) + self.margin_top, anchor,
+                font_name=self.body_font[0], font_path=self.body_font[1]
             ))
 
     def select(self, key: str, *args, **kwargs) -> bool:
@@ -227,11 +237,11 @@ class Menu:
     
     def resize(self, value: int) -> int:
         return value * self.size_percent // 100
-
-
-GAME_FONT_PATH = "resources/Game Font.ttf"
-GAME_FONT_NAME = "Game Font"
-TEXT_FONT_NAME = "Times New Roman"
+    
+    def destroy(self):
+        destroy(self.menu_label)
+        for text_ in self.menu_text:
+            destroy(text_)
 
 
 def choice(iterable: Iterable):

@@ -414,6 +414,8 @@ CLEFS = {
                           )
 }
 
+CLEF_SYMBOLS_NAMES = {clef.symbol: name for name, clef in CLEFS.items()}
+
 
 class Scale:
     pattern: [int]
