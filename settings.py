@@ -186,7 +186,7 @@ class SettingsScreen(Menu):
                 clef_entry = MenuEntry(clef.symbol, self.toggle_clef, clef.name)
                 clef_entries.append(clef_entry)
             self.sub_menu = Menu("Enable/Disable Clefs", clef_entries,
-                                 left=True, margin_left=500, margin_top=50,
+                                 left=True, margin_left=400, margin_top=50,
                                  body_font=(GAME_FONT_NAME, GAME_FONT_PATH))
         for text_ in self.sub_menu.menu_text:
             if CLEF_SYMBOLS_NAMES[text_.text[-1]] in self.settings.clefs:
