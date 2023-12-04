@@ -58,7 +58,7 @@ guessing.
   - [x] Allow the user to enter the settings menu from the main menu
   - [ ] Allow the user to select different types of scale
     - [x] Standard Scales
-    - [ ] Church Modes
+    - [x] Church Modes
     - [ ] Reset to default if none selected
   - [ ] Allow the user to select different clefs
   - [ ] Allow the user to select different key signatures
@@ -69,6 +69,7 @@ guessing.
       in the settings menu
 - [ ] Note, the settings menu will be controlled using the number or arrow keys
       and the return key
+- [ ] Fix the order of the scale types in World
 
 ***
 ### My Info
