@@ -207,7 +207,7 @@ def void_draw(world: World):
     if len(world.boulders) == 0:
         boulder_prob = BOULDER_MAX_PROB
     if rand() < boulder_prob and len(world.boulders) < MAX_BOULDERS:
-        print(boulder_prob)
+        # print(boulder_prob)
         Boulder(world)
     world.move_boulders_down()
     world.remove_fallen_boulders()

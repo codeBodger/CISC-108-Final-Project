@@ -509,9 +509,6 @@ class Scale:
             disp_text += " "
             this_note = this_note.up_by(up_by, len(self.pattern))
             disp_text += repr(this_note)
-        
-        if "Fb" in disp_text:
-            print("hi")
         return disp_text
     
     def make_text(self, x: int, y: int):
