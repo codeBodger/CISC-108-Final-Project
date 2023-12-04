@@ -151,8 +151,8 @@ class Clef:
                 
         return set(
             all_notes[
-                3 * (LEDGER_LINES - world.settings.max_low_ledger_positions)
-                :len(all_notes) -
+                3 * (LEDGER_LINES - world.settings.max_low_ledger_positions):
+                len(all_notes) -
                 3 * (LEDGER_LINES - world.settings.max_high_ledger_positions)
             ]
         )
@@ -179,7 +179,7 @@ class KeySignature:
             note (Note): The note to test about
 
         Returns:
-            bool: Whether or not the letter of note is in the key signature.
+            bool: Whether the letter of note is in the key signature.
         """
         if self.sharps_flats < 0:
             return note.letter in ORDER_OF_SHARPS[self.sharps_flats:]
@@ -196,7 +196,7 @@ class KeySignature:
             note (Note): The note to compare to this key signature
 
         Returns:
-            bool: Whether or not the accidental and key signature are different
+            bool: Whether the accidental and key signature are different
         """
         if note not in self:
             raise KeyError(
@@ -272,7 +272,7 @@ class Note:
     def accidentals_symbols(self, clef: Clef, with_natural: bool = True) -> str:
         """
         Gets the symbols to display the accidentals of this note, given the clef
-            and whether or not to also display naturals.
+            and whether to also display naturals.
             Note: since the font has no width for accidentals, multiple flats
             will look like one flat and many sharps will look either like one
             double sharp, or a double sharp overlaid on a single sharp.
@@ -280,8 +280,8 @@ class Note:
         Args:
             clef (Clef): The clef with respect to which to find the characters
                 for the accidentals.
-            with_natural (bool): Whether or not to display naturals, or leave
-                them blank.  By default, True, displaying them.
+            with_natural (bool): Whether to display naturals, or leave them
+                blank.  By default, True, displaying them.
 
         Returns:
             str: The accidentals to display.
@@ -311,8 +311,8 @@ class Note:
                 instead of one to be displayed with Game Font.
             key_signature (KeySignature): The key signature to use to see if an
                 accidental needs to be displayed.
-            octave (bool): Whether or not to include the octave number.  By
-                default, False, i.e. no octave number.
+            octave (bool): Whether to include the octave number.  By default,
+                False, i.e. no octave number.
 
         Returns:
             str: The string representation of the note, either a plain text form
@@ -351,8 +351,8 @@ class Note:
             half_steps (int): The number of half steps up from this one that the
                 note to get is.
             scale_length (int): The length of the scale (excluding the octave),
-                used to determine behaviour regarding whether or not to always
-                go up by exactly one letter name.
+                used to determine behaviour regarding whether to always go up by
+                    exactly one letter name.
 
         Returns:
             Note: The next note in the scale.
@@ -475,7 +475,7 @@ class Scale:
         self.starts_on = Note(starts_on)
         self.clef = CLEFS[clef]
         self.background = rectangle('white',
-                                    BACKGROUND_WIDTH,BACKGROUND_HEIGHT)
+                                    BACKGROUND_WIDTH, BACKGROUND_HEIGHT)
         self.display = text(
             'black', "", SCALE_TEXT_SIZE,
             font_name=GAME_FONT_NAME, font_path=GAME_FONT_PATH

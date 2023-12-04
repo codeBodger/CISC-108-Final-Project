@@ -66,8 +66,8 @@ class Boulder:
             world (World): The world in which to check the boulders.
 
         Returns:
-            bool: Whether or not this boulder is colliding or otherwise
-                interfering with an existing boulder.
+            bool: Whether this boulder is colliding or otherwise interfering
+                with an existing boulder.
         """
         for boulder in world.boulders.values():
             if colliding(self.boulder, boulder.boulder):

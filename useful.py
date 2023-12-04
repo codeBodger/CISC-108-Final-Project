@@ -49,7 +49,7 @@ def ensure_octave(pattern: [int]) -> bool:
         pattern (list[int]): The scale pattern to evaluate.
 
     Returns:
-        bool: Whether or not it's a valid scale.
+        bool: Whether it's a valid scale.
     """
     return sum(pattern) == 12
 
@@ -86,7 +86,7 @@ def ensure_version(actual: str, required: str) -> bool:
         required (str): The minimum version that we're testing against
 
     Returns:
-        bool: Whether or not the program/module is new enough
+        bool: Whether the program/module is new enough
     """
     return (
             tuple(map(int, (actual.split("."))))
@@ -128,8 +128,8 @@ class MatchStr(str):
             match_list (Iterable or str): The list or string to check against
 
         Returns:
-            bool: Whether or not the value of the MatchStr is in the list or is
-                equal to the string
+            bool: Whether the value of the MatchStr is in the list or is equal
+                to the string
         """
         if isinstance(match_list, str):
             return match_list.__eq__(self)
@@ -223,11 +223,7 @@ class Menu:
 
     def select(self, key: str, *args, **kwargs) -> bool:
         try:
-            selection = (int(
-                str(key)
-                .replace("[", "")
-                .replace("]", ""))
-                         - 1)
+            selection = int(ignore_numpad(key)) - 1
             if selection < 0:
                 raise IndexError("Negatives are out of bounds here.")
             self.entries[selection](*args, **kwargs)
@@ -242,6 +238,10 @@ class Menu:
         destroy(self.menu_label)
         for text_ in self.menu_text:
             destroy(text_)
+
+
+def ignore_numpad(key: str):
+    return str(key).replace("[", "").replace("]", "")
 
 
 def choice(iterable: Iterable):

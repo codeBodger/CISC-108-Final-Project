@@ -2,7 +2,7 @@ import json
 from designer import *
 from dataclasses import dataclass, asdict, field
 from useful import Menu, MenuEntry, GAME_FONT_PATH, pm_bool, GAME_FONT_NAME, \
-    make_scale_keys_text, TEXT_FONT_NAME
+    make_scale_keys_text, TEXT_FONT_NAME, ignore_numpad
 from scale import TOTAL_NOTES, LEDGER_LINES, NOTES_START, LETTERS_PER_OCTAVE, \
     NORMAL_SCALE_NAMES, SCALE_TYPE_INFO, NORMAL_SCALE_KEYS, \
     CHURCH_MODES_NAMES, CHURCH_MODES_KEYS, CLEFS, CLEF_SYMBOLS_NAMES
@@ -93,6 +93,7 @@ class Settings(object):
 
 ACTIVE   = 1.
 INACTIVE = .3
+
 
 @dataclass
 class SettingsScreen(Menu):
@@ -211,6 +212,7 @@ def void_setup():
 
 
 def void_keyPressed(menu: SettingsScreen, key: str):
+    key = ignore_numpad(key)
     match menu.active_sub_menu:
         case "ledger lines":
             change = 0
@@ -227,30 +229,23 @@ def void_keyPressed(menu: SettingsScreen, key: str):
             else:
                 menu.settings.max_high_ledger_positions -= change
             menu.ledger_lines()
-        case "standard scales":
+        case "standard scales" | "church modes":
             if key == 'escape':
                 menu.exit_sub_menu()
-            if key not in NORMAL_SCALE_KEYS:
+            scale_keys, scale_names, scales = (
+                (NORMAL_SCALE_KEYS, NORMAL_SCALE_NAMES, menu.standard_scales)
+                if menu.active_sub_menu == "standard scales"
+                else (CHURCH_MODES_KEYS, CHURCH_MODES_NAMES, menu.church_modes)
+            )
+            if key not in scale_keys:
                 return
             scale_name = SCALE_TYPE_INFO[key].name
-            if scale_name in NORMAL_SCALE_NAMES:
+            if scale_name in scale_names:
                 if scale_name in menu.settings.scale_types:
                     menu.settings.scale_types.remove(scale_name)
                 else:
                     menu.settings.scale_types.append(scale_name)
-            menu.standard_scales()
-        case "church modes":
-            if key == 'escape':
-                menu.exit_sub_menu()
-            if key not in CHURCH_MODES_KEYS:
-                return
-            scale_name = SCALE_TYPE_INFO[key].name
-            if scale_name in CHURCH_MODES_NAMES:
-                if scale_name in menu.settings.scale_types:
-                    menu.settings.scale_types.remove(scale_name)
-                else:
-                    menu.settings.scale_types.append(scale_name)
-            menu.church_modes()
+            scales()
         case "clefs":
             if not menu.sub_menu.select(key):
                 if key == "escape":

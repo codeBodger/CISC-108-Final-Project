@@ -142,7 +142,6 @@ class World:
         self.selected = lowest_boulder.boulder.x
         lowest_boulder.boulder.alpha = 1
         
-    
     def update_score(self, amount: float):
         """
         Updates the player's score.
