@@ -17,7 +17,7 @@ awarded by 50%.  The left and right arrow keys are used to select different
 falling boulders, so that when there are multiple falling at the same time, the
 user can tell the game which one they are guessing.  
 
-### [Preview](LINK TO PREVIEW)
+### [Preview the Game](https://youtu.be/YCosyMa_HFo)
 
 ### Instructions
 Use the number keys to select an action from the main menu
@@ -97,7 +97,7 @@ used most extensively were:
 - [x] If the player presses `space`, pause the game and hide the scales
   - [x] Create image for blurry text
 
-#### Milestone 3
+#### Milestone 3: *[Video Link](https://youtu.be/YCosyMa_HFo)*
 - [x] Create a main menu
   - [x] Make the main world accessible from it
 - [x] Create a settings menu
