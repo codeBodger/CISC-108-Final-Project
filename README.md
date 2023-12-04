@@ -61,14 +61,10 @@ guessing.
     - [x] Church Modes
     - [x] Reset to default if none selected
   - [ ] Allow the user to select different clefs
-  - [ ] Allow the user to select different key signatures
   - [x] Allow the user to select different amounts of ledger lines
   - [x] Allow the user to return from the settings menu by pressing escape
 - [ ] Ensure that the scales fit within the specs of the user-defined settings
-- [ ] There's no end condition in the game, but we'll allow the user to set one
-      in the settings menu
-- [ ] Note, the settings menu will be controlled using the number or arrow keys
-      and the return key
+- [ ] Note, the settings menu is controlled using the number and arrow keys
 - [ ] Fix the order of the scale types in World
 
 ***
