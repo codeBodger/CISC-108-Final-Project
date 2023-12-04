@@ -65,7 +65,7 @@ guessing.
   - [x] Allow the user to return from the settings menu by pressing escape
 - [x] Ensure that the scales fit within the specs of the user-defined settings
 - [x] Note, the settings menu is controlled using the number and arrow keys
-- [ ] Fix the order of the scale types in World
+- [x] Fix the order of the scale types in World
 
 ***
 ### My Info

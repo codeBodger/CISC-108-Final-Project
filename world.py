@@ -39,8 +39,11 @@ class World:
             'black', f"{self.score:.4}", 30,
             get_width(), 20,
             font_name=GAME_FONT_NAME, font_path=GAME_FONT_PATH)
-        scale_names_set = set(SCALE_TYPE_KEYS) & set(self.settings.scale_types)
-        self.scale_keys_text = make_scale_keys_text(scale_names_set)
+        scale_names = []
+        for scale_name in SCALE_TYPE_KEYS:
+            if scale_name in self.settings.scale_types:
+                scale_names.append(scale_name)
+        self.scale_keys_text = make_scale_keys_text(scale_names)
         
     def move_boulders_down(self):
         """
