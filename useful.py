@@ -246,21 +246,16 @@ class Menu:
 
 def choice(iterable: Iterable):
     """
-    Takes in any iterable, tries to use random.choice() on it.  If it fails,
-        converts the iterable to list and runs choice on that.
-        
+    Takes in any iterable, converts it to list and runs choice on that.
+    
     Args:
         iterable (Iterable): Any Iterable from which to get a random element
         
     Returns:
         A random element of iterable
     """
-    try:
-        ret = random.choice(iterable)
-    except TypeError:
-        ret = random.choice(list(iterable))
-    return ret
-
+    return random.choice(list(iterable))
+    
 
 GUTTER = 200  # How far away from the right to put the score and other info
 
