@@ -56,10 +56,10 @@ guessing.
   - [x] Make the main world accessible from it
 - [x] Create a settings menu
   - [x] Allow the user to enter the settings menu from the main menu
-  - [ ] Allow the user to select different types of scale
+  - [x] Allow the user to select different types of scale
     - [x] Standard Scales
     - [x] Church Modes
-    - [ ] Reset to default if none selected
+    - [x] Reset to default if none selected
   - [ ] Allow the user to select different clefs
   - [ ] Allow the user to select different key signatures
   - [x] Allow the user to select different amounts of ledger lines

@@ -48,9 +48,19 @@ class Settings(object):
             f.write(config_string)
     
     def validate(self):
+        self.validate_scale_types()
+        self.validate_clefs()
         self.validate_key_signatures()
         self.validate_ledger_lines()
-        
+    
+    def validate_scale_types(self):
+        if not self.scale_types:
+            self.scale_types = DEFAULT_CONFIG["scale_types"]
+    
+    def validate_clefs(self):
+        if not self.clefs:
+            self.clefs = DEFAULT_CONFIG["clefs"]
+    
     def validate_key_signatures(self):
         self.max_sharps_key_signature = min(
             self.max_sharps_key_signature, LETTERS_PER_OCTAVE
