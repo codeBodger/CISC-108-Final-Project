@@ -545,4 +545,7 @@ class Scale:
         self.blur.y += speed
     
     def remove(self):
+        """ Destroys all designer objects associated with the scale. """
         destroy(self.display)
+        destroy(self.blur)
+        destroy(self.background)

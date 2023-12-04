@@ -132,6 +132,7 @@ class World:
         self.select(True)
         
     def select_lowest(self):
+        """ Selects the boulder lowest down in the window. """
         if not self.boulders:
             self.selected = 0
             return
@@ -255,9 +256,7 @@ def void_keyPressed(world: World, key: str):
 
 
 def whens():
-    """
-    Calls all of the required `when`s for the main game.
-    """
+    """ Calls all of the required `when`s for the main game. """
     when('starting: world', void_setup)
     when('updating: world', void_draw)
     when('typing: world', void_keyPressed)

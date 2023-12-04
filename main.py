@@ -12,10 +12,12 @@ ENTRIES = [
 
 
 def void_setup():
+    """ See world.void_setup for explanation """
     return Menu(HEADER, ENTRIES)
 
 
 def void_keyPressed(menu: Menu, key: str):
+    """ See world.void_keyPressed for explanation """
     if not menu.select(key):
         match key:
             case "escape":
@@ -25,6 +27,7 @@ def void_keyPressed(menu: Menu, key: str):
 
 
 def main():
+    """ Main handler for the entire program """
     if not ensure_version(DESIGNER_VERSION, MIN_DESIGNER_VERSION):
         raise Exception(
             f"DesignerVersionError: {DESIGNER_VERSION}, "

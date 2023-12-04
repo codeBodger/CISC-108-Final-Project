@@ -28,10 +28,15 @@ class Settings(object):
     max_low_ledger_positions: int
     
     def __post_init__(self):
+        """ Causes self.validate() to be called after initialisation """
         self.validate()
     
     @classmethod
     def load(cls):
+        """
+        Returns a Settings object from the settings stored in .config.json, or
+            if the config isn't found, uses the default settings.
+        """
         try:
             with open(".config.json") as f:
                 config_string = f.read()
@@ -43,26 +48,43 @@ class Settings(object):
         return self
     
     def save(self):
+        """ Saves this Settings object as JSON data to .config.json """
         config = asdict(self)
         config_string = json.dumps(config, indent=2)
         with open(".config.json", "w") as f:
             f.write(config_string)
     
     def validate(self):
+        """
+        Handles checking of incoming data from .config.json to ensure that it's
+            viable.  Additionally, handles fixing this data.
+        """
         self.validate_scale_types()
         self.validate_clefs()
         self.validate_key_signatures()
         self.validate_ledger_lines()
     
     def validate_scale_types(self):
+        """
+        Handles the validation of the scale types: uses the default if none are
+            listed in .config.json
+        """
         if not self.scale_types:
             self.scale_types = DEFAULT_CONFIG["scale_types"]
     
     def validate_clefs(self):
+        """
+        Handles the validation of the clefs: uses the default if none are listed
+            in .config.json
+        """
         if not self.clefs:
             self.clefs = DEFAULT_CONFIG["clefs"]
     
     def validate_key_signatures(self):
+        """
+        Handles the validation of the key signatures, though functionality
+            needing them hasn't been implemented.
+        """
         self.max_sharps_key_signature = min(
             self.max_sharps_key_signature, LETTERS_PER_OCTAVE
         )
@@ -77,6 +99,10 @@ class Settings(object):
         )
     
     def validate_ledger_lines(self):
+        """
+        Handles the validation of the ledger lines: uses the closest viable
+            count if the values stored in .config.json are out of range.
+        """
         self.max_low_ledger_positions = min(
             self.max_low_ledger_positions, LEDGER_LINES
         )
@@ -106,6 +132,10 @@ class SettingsScreen(Menu):
     sub_menu: list[Text] | Menu | None = None
     
     def __post_init__(self):
+        """
+        The SettingsScreen menu always has the same entries, so these are set in
+            __post_init_(), after overriding the field and making it optional
+        """
         self.entries = [
             MenuEntry("Enable/Disable Standard Scales", self.standard_scales),
             MenuEntry("Enable/Disable Church Modes", self.church_modes),
@@ -116,6 +146,9 @@ class SettingsScreen(Menu):
         super().__post_init__()
 
     def standard_scales(self):
+        """
+        Handles the settings to enable and disable the standard scale types.
+        """
         if self.active_sub_menu != "standard scales":
             self.active_sub_menu = "standard scales"
             self.sub_menu = [
@@ -130,6 +163,7 @@ class SettingsScreen(Menu):
                 scale_type_text.alpha = INACTIVE
     
     def church_modes(self):
+        """ Handles the settings to enable and disable the church modes. """
         if self.active_sub_menu != "church modes":
             self.active_sub_menu = "church modes"
             self.sub_menu = [
@@ -144,6 +178,7 @@ class SettingsScreen(Menu):
                 scale_type_text.alpha = INACTIVE
 
     def clefs(self):
+        """ Handles the settings to enable and disable clefs. """
         if self.active_sub_menu != "clefs":
             self.active_sub_menu = "clefs"
             clef_entries = []
@@ -159,7 +194,13 @@ class SettingsScreen(Menu):
             else:
                 text_.alpha = INACTIVE
 
-    def toggle_clef(self, clef_name):
+    def toggle_clef(self, clef_name: str):
+        """
+        Special function to add or remove a clef from the list in the settings
+        
+        Args:
+            clef_name (str): The name of the clef to enable or disable
+        """
         if clef_name in self.settings.clefs:
             self.settings.clefs.remove(clef_name)
         else:
@@ -167,6 +208,10 @@ class SettingsScreen(Menu):
         self.clefs()
 
     def ledger_lines(self):
+        """
+        Handles changing the number of ledger lines, both at the top and bottom
+            of the staff.
+        """
         self.settings.validate_ledger_lines()
         
         low_ledger_line  = chr(NOTES_START + LEDGER_LINES + 1
@@ -197,6 +242,7 @@ class SettingsScreen(Menu):
             self.sub_menu[1].x += 30
 
     def exit_sub_menu(self):
+        """ Does everything needed to return to the main settings menu. """
         self.active_sub_menu = ""
         self.active_sub_menu_left = True
         if isinstance(self.sub_menu, Menu):
@@ -208,10 +254,12 @@ class SettingsScreen(Menu):
 
 
 def void_setup():
+    """ See world.void_setup for explanation """
     return SettingsScreen(left=True, size_percent=70, margin_left=20)
 
 
 def void_keyPressed(menu: SettingsScreen, key: str):
+    """ See world.void_keyPressed for explanation """
     key = ignore_numpad(key)
     match menu.active_sub_menu:
         case "ledger lines":
@@ -261,8 +309,6 @@ def void_keyPressed(menu: SettingsScreen, key: str):
 
 
 def whens():
-    """
-    Calls all of the required `when`s for the settings menu.
-    """
+    """ Calls all of the required `when`s for the settings menu. """
     when('starting: settings_menu', void_setup)
     when('typing: settings_menu', void_keyPressed)

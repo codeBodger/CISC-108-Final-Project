@@ -197,6 +197,10 @@ class Menu:
     body_font: type[str, tuple[str, str]] = TEXT_FONT_NAME
     
     def __post_init__(self):
+        """
+        Takes care of the actual initialisation of the Menu, i.e. creating the
+            display of it.
+        """
         if self.left:
             x = self.margin_left
             anchor = 'midleft'
@@ -222,6 +226,19 @@ class Menu:
             ))
 
     def select(self, key: str, *args, **kwargs) -> bool:
+        """
+        Called when the user tries to select an option from the list.
+        
+        Args:
+            key (str): The key pressed to choose which option
+            *args: Any more arguments that need to be passed to the `do`
+                function of the MenuEntry chosen, beyond those specified when it
+                was created.
+            **kwargs: Any more key word arguments, as described above for *args
+
+        Returns:
+            bool: Whether the key pressed successfully chose an option
+        """
         try:
             selection = int(ignore_numpad(key)) - 1
             if selection < 0:
@@ -232,15 +249,34 @@ class Menu:
             return False
     
     def resize(self, value: int) -> int:
+        """
+        Used to resize a height, width, or location value based on size_percent.
+        
+        Args:
+            value (int): The value to be resized
+
+        Returns:
+            int: The resized value
+        """
         return value * self.size_percent // 100
     
     def destroy(self):
+        """ Destroys all of the DesignerObjects of the menu. """
         destroy(self.menu_label)
         for text_ in self.menu_text:
             destroy(text_)
 
 
-def ignore_numpad(key: str):
+def ignore_numpad(key: str) -> str:
+    """
+    Strips brackets indicating a number pad key press
+    
+    Args:
+        key (str): The key pressed
+
+    Returns:
+        str: The key pressed, ignoring if it was on the number pad
+    """
     return str(key).replace("[", "").replace("]", "")
 
 
@@ -260,7 +296,17 @@ def choice(iterable: Iterable):
 GUTTER = 200  # How far away from the right to put the score and other info
 
 
-def make_scale_keys_text(scale_names) -> [DesignerObject]:
+def make_scale_keys_text(scale_names: [str]) -> [DesignerObject]:
+    """
+    Makes the table showing the user what keys to press for which scale type.
+    
+    Args:
+        scale_names (list[str]): The list of names of scale type
+
+    Returns:
+        list[DesignerObject]: A list of DesignerObjects displaying which keys to
+            press for which scale type.
+    """
     from scale import SCALE_TYPE_KEYS
     scale_keys_strs = [
         f"{SCALE_TYPE_KEYS[scale_type_name]}: {scale_type_name}"
