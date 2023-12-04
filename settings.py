@@ -1,11 +1,11 @@
 import json
 from designer import *
 from dataclasses import dataclass, asdict, field
-from useful import Menu, MenuEntry, GAME_FONT_PATH, pm_bool, GAME_FONT_NAME, make_scale_keys_text, GUTTER, \
-    TEXT_FONT_NAME
+from useful import Menu, MenuEntry, GAME_FONT_PATH, pm_bool, GAME_FONT_NAME, \
+    make_scale_keys_text, TEXT_FONT_NAME
 from scale import TOTAL_NOTES, LEDGER_LINES, NOTES_START, LETTERS_PER_OCTAVE, \
-    NORMAL_SCALE_NAMES, SCALE_TYPE_INFO, NORMAL_SCALE_KEYS, CHURCH_MODES_NAMES, CHURCH_MODES_KEYS, CLEFS, \
-    CLEF_SYMBOLS_NAMES
+    NORMAL_SCALE_NAMES, SCALE_TYPE_INFO, NORMAL_SCALE_KEYS, \
+    CHURCH_MODES_NAMES, CHURCH_MODES_KEYS, CLEFS, CLEF_SYMBOLS_NAMES
 
 DEFAULT_CONFIG = {
     "scale_types": ["Major",
@@ -91,6 +91,9 @@ class Settings(object):
         )
 
 
+ACTIVE   = 1.
+INACTIVE = .3
+
 @dataclass
 class SettingsScreen(Menu):
     header: str = "Settings: Press a number key to continue or "\
@@ -121,9 +124,9 @@ class SettingsScreen(Menu):
             self.sub_menu += make_scale_keys_text(NORMAL_SCALE_NAMES)
         for scale_type_text in self.sub_menu[1:]:
             if scale_type_text.text[3:] in self.settings.scale_types:
-                scale_type_text.alpha = 1.
+                scale_type_text.alpha = ACTIVE
             else:
-                scale_type_text.alpha = .3
+                scale_type_text.alpha = INACTIVE
     
     def church_modes(self):
         if self.active_sub_menu != "church modes":
@@ -135,9 +138,9 @@ class SettingsScreen(Menu):
             self.sub_menu += make_scale_keys_text(CHURCH_MODES_NAMES)
         for scale_type_text in self.sub_menu[1:]:
             if scale_type_text.text[3:] in self.settings.scale_types:
-                scale_type_text.alpha = 1.
+                scale_type_text.alpha = ACTIVE
             else:
-                scale_type_text.alpha = .3
+                scale_type_text.alpha = INACTIVE
 
     def clefs(self):
         if self.active_sub_menu != "clefs":
@@ -146,14 +149,14 @@ class SettingsScreen(Menu):
             for clef in CLEFS.values():
                 clef_entry = MenuEntry(clef.symbol, self.toggle_clef, clef.name)
                 clef_entries.append(clef_entry)
-            self.sub_menu = Menu("Enable/Disable Clefs", clef_entries, left=True,
-                                 margin_left=500, margin_top=50,
+            self.sub_menu = Menu("Enable/Disable Clefs", clef_entries,
+                                 left=True, margin_left=500, margin_top=50,
                                  body_font=(GAME_FONT_NAME, GAME_FONT_PATH))
         for text_ in self.sub_menu.menu_text:
             if CLEF_SYMBOLS_NAMES[text_.text[-1]] in self.settings.clefs:
-                text_.alpha = 1.
+                text_.alpha = ACTIVE
             else:
-                text_.alpha = .3
+                text_.alpha = INACTIVE
 
     def toggle_clef(self, clef_name):
         if clef_name in self.settings.clefs:
@@ -172,9 +175,13 @@ class SettingsScreen(Menu):
         
         if self.active_sub_menu == "ledger lines":
             self.sub_menu[0].text = low_ledger_line
-            self.sub_menu[0].alpha = 1. if self.active_sub_menu_left else .3
+            self.sub_menu[0].alpha = (
+                ACTIVE if self.active_sub_menu_left else INACTIVE
+            )
             self.sub_menu[1].text = high_ledger_line
-            self.sub_menu[1].alpha = .3 if self.active_sub_menu_left else 1.
+            self.sub_menu[1].alpha = (
+                INACTIVE if self.active_sub_menu_left else ACTIVE
+            )
         else:
             self.active_sub_menu = "ledger lines"
             self.active_sub_menu_left = True
@@ -182,7 +189,8 @@ class SettingsScreen(Menu):
                 text('black', low_ledger_line, 60, anchor="midright",
                      font_name=GAME_FONT_NAME, font_path=GAME_FONT_PATH),
                 text('black', high_ledger_line, 60, anchor="midleft",
-                     font_name=GAME_FONT_NAME, font_path=GAME_FONT_PATH, alpha=.3)
+                     font_name=GAME_FONT_NAME, font_path=GAME_FONT_PATH,
+                     alpha=INACTIVE)
             ]
             self.sub_menu[0].x -= 30
             self.sub_menu[1].x += 30
